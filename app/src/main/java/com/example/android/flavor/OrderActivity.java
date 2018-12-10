@@ -5,7 +5,8 @@ import android.content.Intent;
         import android.os.Bundle;
         import android.os.Environment;
         import android.provider.MediaStore;
-        import android.support.v7.app.AlertDialog;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
         import android.support.v7.app.AppCompatActivity;
         import android.text.InputType;
         import android.util.Log;
@@ -62,7 +63,11 @@ public class OrderActivity extends AppCompatActivity
 
         File file = new File(Environment.getExternalStorageDirectory(), imageFileName);
 
-        mPhotoURI = Uri.fromFile(file);
+        // mPhotoURI = Uri.fromFile(file);
+        mPhotoURI = FileProvider.getUriForFile(OrderActivity.this,
+                BuildConfig.APPLICATION_ID + ".provider",
+                file);
+
         Log.i(TAG, mPhotoURI.toString());
         intent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoURI);
         startActivityForResult(intent, REQUEST_TAKE_PHOTO);
