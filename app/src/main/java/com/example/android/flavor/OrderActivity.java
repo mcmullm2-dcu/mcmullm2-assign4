@@ -52,6 +52,13 @@ public class OrderActivity extends AppCompatActivity
 
     }
 
+    /**
+     *
+     * <a href="https://inthecheesefactory.com/blog/how-to-share-access-to-file-with-fileprovider-on-android-nougat/en">Source 1</a>
+     * <a href="https://rahulupadhyay.wordpress.com/2016/12/27/android-n-fileuriexposedexception/">Source 2</a>
+     * @param v
+     *
+     */
     public void dispatchTakePictureIntent(View v)
     {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -63,7 +70,6 @@ public class OrderActivity extends AppCompatActivity
 
         File file = new File(Environment.getExternalStorageDirectory(), imageFileName);
 
-        // mPhotoURI = Uri.fromFile(file);
         mPhotoURI = FileProvider.getUriForFile(OrderActivity.this,
                 BuildConfig.APPLICATION_ID + ".provider",
                 file);
@@ -87,6 +93,7 @@ public class OrderActivity extends AppCompatActivity
             //I have strings in strings.xml but have hardcoded here to copy/paste to students if needed
             CharSequence text = "Image Taken successfully";
             int duration = Toast.LENGTH_SHORT;
+            Log.i(TAG, mPhotoURI.toString());
 
             Toast toast = Toast.makeText(this, text, duration);
             toast.show();
@@ -124,6 +131,7 @@ public class OrderActivity extends AppCompatActivity
     {
 
         //check that Name is not empty, and ask do they want to continue
+        Log.i(TAG, "Email Attachment: " + mPhotoURI.toString());
 
         String customerName = mCustomerName.getText().toString();
         if (customerName.matches(""))
