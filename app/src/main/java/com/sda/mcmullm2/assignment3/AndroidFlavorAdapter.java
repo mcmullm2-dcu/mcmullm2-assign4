@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.flavor;
+package com.sda.mcmullm2.assignment3;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
