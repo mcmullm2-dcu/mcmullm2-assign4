@@ -107,6 +107,12 @@ public class OrderActivity extends AppCompatActivity
         return file;
     }
 
+    /**
+     * <a href="https://developer.android.com/training/camera/photobasics#java">Source</a>
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
