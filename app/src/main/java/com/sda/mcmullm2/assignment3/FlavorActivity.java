@@ -18,7 +18,12 @@ package com.sda.mcmullm2.assignment3;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -55,7 +60,24 @@ public class FlavorActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listview_flavor);
         listView.setAdapter(flavorAdapter);
 
+        // Add event listener to each item.
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
+                AndroidFlavor selectedItem = androidFlavors.get(i);
+                String toastMsg = selectedItem.getVersionName();
+                Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
 
+                // Not required. Just animating the selected item.
+                final int animationDuration = 200;
+                view.animate().setInterpolator(new AccelerateInterpolator(0.8f)).setDuration(animationDuration).translationY(-100).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.animate().setInterpolator(new BounceInterpolator()).setDuration(animationDuration * 4).translationY(0);
+                    }
+                });
+            }
+        });
     }
 
 }
