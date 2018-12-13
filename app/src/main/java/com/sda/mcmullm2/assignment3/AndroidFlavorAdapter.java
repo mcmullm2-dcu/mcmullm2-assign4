@@ -27,9 +27,9 @@ import java.util.ArrayList;
 
 /*
 * {@link AndroidFlavorAdapter} is an {@link ArrayAdapter} that can provide the layout for each list
-* based on a data source, which is a list of {@link AndroidFlavor} objects.
+* based on a data source, which is a list of {@link Product} objects.
 * */
-public class AndroidFlavorAdapter extends ArrayAdapter<AndroidFlavor> {
+public class AndroidFlavorAdapter extends ArrayAdapter<Product> {
 
     private static final String LOG_TAG = AndroidFlavorAdapter.class.getSimpleName();
 
@@ -39,14 +39,14 @@ public class AndroidFlavorAdapter extends ArrayAdapter<AndroidFlavor> {
      * to populate into the lists.
      *
      * @param context        The current context. Used to inflate the layout file.
-     * @param androidFlavors A List of AndroidFlavor objects to display in a list
+     * @param products A List of Product objects to display in a list
      */
-    public AndroidFlavorAdapter(Activity context, ArrayList<AndroidFlavor> androidFlavors) {
+    public AndroidFlavorAdapter(Activity context, ArrayList<Product> products) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
         // the second argument is used when the ArrayAdapter is populating a single TextView.
         // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
         // going to use this second argument, so it can be any value. Here, we used 0.
-        super(context, 0, androidFlavors);
+        super(context, 0, products);
     }
 
     /**
@@ -67,26 +67,26 @@ public class AndroidFlavorAdapter extends ArrayAdapter<AndroidFlavor> {
                     R.layout.list_item, parent, false);
         }
 
-        // Get the {@link AndroidFlavor} object located at this position in the list
-        AndroidFlavor currentAndroidFlavor = getItem(position);
+        // Get the {@link Product} object located at this position in the list
+        Product currentProduct = getItem(position);
 
         // Find the TextView in the list_item.xml layout with the ID version_name
         TextView nameTextView = (TextView) listItemView.findViewById(R.id.version_name);
-        // Get the version name from the current AndroidFlavor object and
+        // Get the version name from the current Product object and
         // set this text on the name TextView
-        nameTextView.setText(currentAndroidFlavor.getVersionName());
+        nameTextView.setText(currentProduct.getProductName());
 
         // Find the TextView in the list_item.xml layout with the ID version_number
         TextView numberTextView = (TextView) listItemView.findViewById(R.id.version_number);
-        // Get the version number from the current AndroidFlavor object and
+        // Get the version number from the current Product object and
         // set this text on the number TextView
-        numberTextView.setText(currentAndroidFlavor.getVersionNumber());
+        numberTextView.setText(currentProduct.getProductPrice());
 
         // Find the ImageView in the list_item.xml layout with the ID list_item_icon
         ImageView iconView = (ImageView) listItemView.findViewById(R.id.list_item_icon);
-        // Get the image resource ID from the current AndroidFlavor object and
+        // Get the image resource ID from the current Product object and
         // set the image to iconView
-        iconView.setImageResource(currentAndroidFlavor.getImageResourceId());
+        iconView.setImageResource(currentProduct.getImageResourceId());
 
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView

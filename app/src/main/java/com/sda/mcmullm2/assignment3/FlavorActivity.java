@@ -38,23 +38,23 @@ public class FlavorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flavor);
 
-        // Create an ArrayList of AndroidFlavor objects
-        final ArrayList<AndroidFlavor> androidFlavors = new ArrayList<AndroidFlavor>();
-        androidFlavors.add(new AndroidFlavor("Donut", "1.6", R.drawable.donut));
-        androidFlavors.add(new AndroidFlavor("Eclair", "2.0-2.1", R.drawable.eclair));
-        androidFlavors.add(new AndroidFlavor("Froyo", "2.2-2.2.3", R.drawable.froyo));
-        androidFlavors.add(new AndroidFlavor("GingerBread", "2.3-2.3.7", R.drawable.gingerbread));
-        androidFlavors.add(new AndroidFlavor("Honeycomb", "3.0-3.2.6", R.drawable.honeycomb));
-        androidFlavors.add(new AndroidFlavor("Ice Cream Sandwich", "4.0-4.0.4", R.drawable.icecream));
-        androidFlavors.add(new AndroidFlavor("Jelly Bean", "4.1-4.3.1", R.drawable.jellybean));
-        androidFlavors.add(new AndroidFlavor("KitKat", "4.4-4.4.4", R.drawable.kitkat));
-        androidFlavors.add(new AndroidFlavor("Lollipop", "5.0-5.1.1", R.drawable.lollipop));
-        androidFlavors.add(new AndroidFlavor("Marshmallow", "6.0-6.0.1", R.drawable.marshmallow));
+        // Create an ArrayList of Product objects
+        final ArrayList<Product> products = new ArrayList<Product>();
+        products.add(new Product("Donut", "1.6", R.drawable.donut));
+        products.add(new Product("Eclair", "2.0-2.1", R.drawable.eclair));
+        products.add(new Product("Froyo", "2.2-2.2.3", R.drawable.froyo));
+        products.add(new Product("GingerBread", "2.3-2.3.7", R.drawable.gingerbread));
+        products.add(new Product("Honeycomb", "3.0-3.2.6", R.drawable.honeycomb));
+        products.add(new Product("Ice Cream Sandwich", "4.0-4.0.4", R.drawable.icecream));
+        products.add(new Product("Jelly Bean", "4.1-4.3.1", R.drawable.jellybean));
+        products.add(new Product("KitKat", "4.4-4.4.4", R.drawable.kitkat));
+        products.add(new Product("Lollipop", "5.0-5.1.1", R.drawable.lollipop));
+        products.add(new Product("Marshmallow", "6.0-6.0.1", R.drawable.marshmallow));
 
         // Create an {@link AndroidFlavorAdapter}, whose data source is a list of
-        // {@link AndroidFlavor}s. The adapter knows how to create list item views for each item
+        // {@link Product}s. The adapter knows how to create list item views for each item
         // in the list.
-        AndroidFlavorAdapter flavorAdapter = new AndroidFlavorAdapter(this, androidFlavors);
+        AndroidFlavorAdapter flavorAdapter = new AndroidFlavorAdapter(this, products);
 
         // Get a reference to the ListView, and attach the adapter to the listView.
         ListView listView = (ListView) findViewById(R.id.listview_flavor);
@@ -64,8 +64,8 @@ public class FlavorActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
-                AndroidFlavor selectedItem = androidFlavors.get(i);
-                String toastMsg = selectedItem.getVersionName();
+                Product selectedItem = products.get(i);
+                String toastMsg = selectedItem.getProductName();
                 Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
 
                 // Not required. Just animating the selected item.
