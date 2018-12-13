@@ -35,12 +35,13 @@
         android:paddingStart="@dimen/activity_horizontal_margin">
 
         <TextView
-            android:id="@+id/version_name"
+            android:id="@+id/product_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/version_number"
+            android:id="@+id/product_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

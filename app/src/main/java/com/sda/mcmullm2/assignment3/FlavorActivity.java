@@ -51,10 +51,10 @@ public class FlavorActivity extends AppCompatActivity {
         products.add(new Product("Lollipop", "5.0-5.1.1", R.drawable.lollipop));
         products.add(new Product("Marshmallow", "6.0-6.0.1", R.drawable.marshmallow));
 
-        // Create an {@link AndroidFlavorAdapter}, whose data source is a list of
+        // Create an {@link ProductAdapter}, whose data source is a list of
         // {@link Product}s. The adapter knows how to create list item views for each item
         // in the list.
-        AndroidFlavorAdapter flavorAdapter = new AndroidFlavorAdapter(this, products);
+        ProductAdapter flavorAdapter = new ProductAdapter(this, products);
 
         // Get a reference to the ListView, and attach the adapter to the listView.
         ListView listView = (ListView) findViewById(R.id.listview_flavor);
