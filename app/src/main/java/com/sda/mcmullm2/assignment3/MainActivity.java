@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
      */
     public void callList(View view)
     {
-        Intent intent = new Intent(this, FlavorActivity.class);
+        Intent intent = new Intent(this, ProductActivity.class);
         if (intent.resolveActivity(getPackageManager()) != null)
         {
             startActivity(intent);

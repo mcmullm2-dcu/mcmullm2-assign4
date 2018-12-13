@@ -34,7 +34,7 @@
         </provider>
 
         <activity
-            android:name="com.sda.mcmullm2.assignment3.FlavorActivity"
+            android:name="com.sda.mcmullm2.assignment3.ProductActivity"
             android:label="Product List"
             android:parentActivityName="com.sda.mcmullm2.assignment3.MainActivity">
         </activity>

@@ -28,10 +28,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * {@link FlavorActivity} shows a list of Android platform releases.
- * For each release, display the name, version number, and image.
+ * {@link ProductActivity} shows a list of products.
+ * For each product, display the name, price, and image.
  */
-public class FlavorActivity extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class FlavorActivity extends AppCompatActivity {
         ProductAdapter flavorAdapter = new ProductAdapter(this, products);
 
         // Get a reference to the ListView, and attach the adapter to the listView.
-        ListView listView = (ListView) findViewById(R.id.listview_flavor);
+        ListView listView = findViewById(R.id.listview_flavor);
         listView.setAdapter(flavorAdapter);
 
         // Add event listener to each item.
