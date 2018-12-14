@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -48,6 +49,14 @@ public class ProductActivity extends AppCompatActivity {
         products.add(new Product("Sports", 60.00, R.drawable.ic_product_sports));
         products.add(new Product("Hoodies", 70.00, R.drawable.ic_product_hoodie));
         products.add(new Product("Baby Tees", 15.00, R.drawable.ic_product_baby));
+        products.add(new Product("Polo Shirt", 50.00, R.drawable.ic_product_polo));
+        products.add(new Product("Loose Fit", 20.00, R.drawable.ic_product_mens));
+        products.add(new Product("Ladies", 40.00, R.drawable.ic_product_ladies));
+        products.add(new Product("Long Sleeve", 60.00, R.drawable.ic_product_longsleeve));
+        products.add(new Product("V-Neck", 40.00, R.drawable.ic_product_vneck));
+        products.add(new Product("Sports", 60.00, R.drawable.ic_product_sports));
+        products.add(new Product("Hoodies", 70.00, R.drawable.ic_product_hoodie));
+        products.add(new Product("Baby Tees", 15.00, R.drawable.ic_product_baby));
 
         // Create an {@link ProductAdapter}, whose data source is a list of
         // {@link Product}s. The adapter knows how to create list item views for each item
@@ -55,7 +64,7 @@ public class ProductActivity extends AppCompatActivity {
         ProductAdapter flavorAdapter = new ProductAdapter(this, products);
 
         // Get a reference to the ListView, and attach the adapter to the listView.
-        ListView listView = findViewById(R.id.listview_flavor);
+        GridView listView = findViewById(R.id.listview_flavor);
         listView.setAdapter(flavorAdapter);
 
         // Add event listener to each item.
