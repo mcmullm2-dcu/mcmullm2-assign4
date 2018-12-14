@@ -25,7 +25,7 @@ public class Product {
     private String productName;
 
     // Price of the product
-    private String productPrice;
+    private double productPrice;
 
     // Drawable resource ID
     private int productResourceId;
@@ -37,7 +37,7 @@ public class Product {
     * @param price is the corresponding price
     * @param resourceId is drawable reference ID that corresponds to the product
     * */
-    public Product(String name, String price, int resourceId)
+    public Product(String name, double price, int resourceId)
     {
         productName = name;
         productPrice = price;
@@ -55,7 +55,7 @@ public class Product {
      * Get the product price
      */
     public String getProductPrice() {
-        return productPrice;
+        return String.format("€%,.2f", productPrice);
     }
 
     /**

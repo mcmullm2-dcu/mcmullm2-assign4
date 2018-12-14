@@ -40,16 +40,14 @@ public class ProductActivity extends AppCompatActivity {
 
         // Create an ArrayList of Product objects
         final ArrayList<Product> products = new ArrayList<Product>();
-        products.add(new Product("Donut", "1.6", R.drawable.donut));
-        products.add(new Product("Eclair", "2.0-2.1", R.drawable.eclair));
-        products.add(new Product("Froyo", "2.2-2.2.3", R.drawable.froyo));
-        products.add(new Product("GingerBread", "2.3-2.3.7", R.drawable.gingerbread));
-        products.add(new Product("Honeycomb", "3.0-3.2.6", R.drawable.honeycomb));
-        products.add(new Product("Ice Cream Sandwich", "4.0-4.0.4", R.drawable.icecream));
-        products.add(new Product("Jelly Bean", "4.1-4.3.1", R.drawable.jellybean));
-        products.add(new Product("KitKat", "4.4-4.4.4", R.drawable.kitkat));
-        products.add(new Product("Lollipop", "5.0-5.1.1", R.drawable.lollipop));
-        products.add(new Product("Marshmallow", "6.0-6.0.1", R.drawable.marshmallow));
+        products.add(new Product("Polo Shirt", 50.00, R.drawable.ic_product_polo));
+        products.add(new Product("Loose Fit", 20.00, R.drawable.ic_product_mens));
+        products.add(new Product("Ladies", 40.00, R.drawable.ic_product_ladies));
+        products.add(new Product("Long Sleeve", 60.00, R.drawable.ic_product_longsleeve));
+        products.add(new Product("V-Neck", 40.00, R.drawable.ic_product_vneck));
+        products.add(new Product("Sports", 60.00, R.drawable.ic_product_sports));
+        products.add(new Product("Hoodies", 70.00, R.drawable.ic_product_hoodie));
+        products.add(new Product("Baby Tees", 15.00, R.drawable.ic_product_baby));
 
         // Create an {@link ProductAdapter}, whose data source is a list of
         // {@link Product}s. The adapter knows how to create list item views for each item
