@@ -16,12 +16,12 @@
 <resources>
     <style parent="Theme.AppCompat.Light.DarkActionBar" name="AppTheme">
 
-    <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimary">@color/primary_color</item>
 
-    <item name="colorPrimaryDark">@color/primary_dark_color</item>
-    <item name="android:colorAccent">@color/accent</item>
+        <item name="colorPrimaryDark">@color/primary_dark_color</item>
+        <item name="android:colorAccent">@color/accent</item>
 
-</style>
+    </style>
 
     <!-- Style for a category of vocabulary words -->
     <style name="CategoryStyle">
@@ -32,6 +32,16 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/primary_color</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+    <style name="HomeButtons">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/list_item_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
 
