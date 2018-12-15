@@ -25,15 +25,6 @@
   </style>
 
   <!-- Style for a category of vocabulary words -->
-  <style name="CategoryStyle">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">@dimen/list_item_height</item>
-    <item name="android:gravity">center_vertical</item>
-    <item name="android:padding">16dp</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:textColor">@color/primary_color</item>
-    <item name="android:textAppearance">?android:textAppearanceMedium</item>
-  </style>
 
   <style name="HomeButtons">
     <item name="android:layout_width">match_parent</item>
@@ -46,12 +37,4 @@
   </style>
 
 
-  <style name="HeaderTextStyle">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">48dp</item>
-    <item name="android:gravity">center_vertical</item>
-    <item name="android:textAllCaps">true</item>
-    <item name="android:textColor">@color/primary_color</item>
-    <item name="android:textSize">15sp</item>
-  </style>
 </resources>

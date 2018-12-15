@@ -28,11 +28,8 @@
   <string name="ready_time">Delivery/Collection in (days)</string>
   <string name="order_message_1">Please find my order attached</string>
   <string name="order_message_collect">I will collect it in </string>
-  <string name="order_message_instructions">Delivery -or- Collect: </string>
   <string name="order_message_end">Regards</string>
   <string name="customer_name_blank">You did not enter your name.</string>
-  <string name="notification_title">Notification!</string>
-  <string name="image_confirm">Image saved successfully </string>
   <string name="to_email">my-tshirt@sda.ie</string>
   <string name="email_subject">Order Request </string>
 
