@@ -15,40 +15,41 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.sda.mcmullm2.assignment3">
+  package="com.sda.mcmullm2.assignment3">
 
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_logo_red_nobg"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+  <application
+    android:allowBackup="true"
+    android:icon="@drawable/ic_logo_red_nobg"
+    android:label="@string/app_name"
+    android:theme="@style/AppTheme">
 
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
-        </provider>
+    <provider
+      android:authorities="${applicationId}.provider"
+      android:exported="false"
+      android:grantUriPermissions="true"
+      android:name="android.support.v4.content.FileProvider">
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/provider_paths"/>
+    </provider>
 
-        <activity
-            android:name="com.sda.mcmullm2.assignment3.ProductActivity"
-            android:label="Product List"
-            android:parentActivityName="com.sda.mcmullm2.assignment3.MainActivity">
-        </activity>
-        <activity android:name="com.sda.mcmullm2.assignment3.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+    <activity
+      android:label="Product List"
+      android:name="com.sda.mcmullm2.assignment3.ProductActivity"
+      android:parentActivityName="com.sda.mcmullm2.assignment3.MainActivity">
+    </activity>
+    <activity android:name="com.sda.mcmullm2.assignment3.MainActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity android:name="com.sda.mcmullm2.assignment3.OrderActivity"
-                  android:parentActivityName="com.sda.mcmullm2.assignment3.MainActivity"
-                  android:label = "Order T-Shirt">
-        </activity>
-    </application>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity
+      android:label="Order T-Shirt"
+      android:name="com.sda.mcmullm2.assignment3.OrderActivity"
+      android:parentActivityName="com.sda.mcmullm2.assignment3.MainActivity">
+    </activity>
+  </application>
 
 </manifest>

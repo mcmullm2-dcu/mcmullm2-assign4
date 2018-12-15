@@ -1,96 +1,96 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/tan_background"
+  android:orientation="vertical">
+
+  <EditText
+    android:id="@+id/editCustomer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/tan_background">
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    android:hint="Enter Your Name"
+    android:imeOptions="actionDone"
+    android:inputType="text"
+    android:textColor="@color/primary_color"
+    android:textColorHint="@color/primary_color"/>
 
-    <EditText
-        android:id="@+id/editCustomer"
-        android:layout_margin="24dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Your Name"
-        android:inputType="text"
-        android:imeOptions="actionDone"
-        android:textColorHint="@color/primary_color"
-        android:textColor="@color/primary_color"/>
+  <ImageView
+    android:id="@+id/imageView"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="24dp"
+    android:layout_alignStart="@+id/editCustomer"
+    android:layout_below="@+id/editCustomer"
+    android:onClick="dispatchTakePictureIntent"
+    android:scaleType="centerCrop"
+    app:srcCompat="@drawable/camera"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/camera"
-        android:id="@+id/imageView"
-        android:layout_marginRight="24dp"
-        android:layout_below="@+id/editCustomer"
-        android:layout_alignStart="@+id/editCustomer"
-        android:layout_marginTop="8dp"
-        android:onClick="dispatchTakePictureIntent"/>
+  <TextView
+    android:id="@+id/imageText"
+    android:textStyle="bold"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="24dp"
+    android:layout_alignBottom="@+id/imageView"
+    android:layout_centerHorizontal="true"
+    android:onClick="dispatchTakePictureIntent"
+    android:text="Take photo for T-Shirt"
+    android:textColor="#ffffff"
+    android:textSize="20sp"
+    />
 
-    <TextView
-        android:id="@+id/imageText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Take photo for T-Shirt"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginLeft="24dp"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:onClick="dispatchTakePictureIntent"
-        />
-
-    <EditText
-        android:id="@+id/editOptional"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Delivery Address -or- For Collection"
-        android:inputType="textMultiLine"
-        android:textColorHint="@color/primary_color"
-        android:textColor="@color/primary_color"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_below="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView"
-        android:layout_marginTop="54dp"/>
+  <EditText
+    android:id="@+id/editOptional"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="54dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:layout_alignEnd="@+id/imageView"
+    android:layout_below="@+id/imageView"
+    android:hint="Delivery Address -or- For Collection"
+    android:inputType="textMultiLine"
+    android:textColor="@color/primary_color"
+    android:textColorHint="@color/primary_color"/>
 
 
-    <TextView
-        android:id="@+id/editCollect"
-        android:layout_width="256dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/editCustomer"
-        android:layout_marginBottom="89dp"
-        android:text="@string/ready_time"
-        android:textColor="@color/primary_color"
-        android:textSize="18sp" />
+  <TextView
+    android:id="@+id/editCollect"
+    android:layout_width="256dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="89dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignStart="@+id/editCustomer"
+    android:text="@string/ready_time"
+    android:textColor="@color/primary_color"
+    android:textSize="18sp"/>
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:layout_gravity="center"
-        android:textSize="15sp"
-        android:gravity="left"
-        android:textColor="#ffffff"
-        android:layout_toLeftOf="@id/editCollect"
-        android:layout_alignTop="@id/editCollect"
-        android:layout_alignEnd="@id/imageView"
-        android:layout_marginEnd="16dp"/>
+  <Spinner
+    android:id="@+id/spinner"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:layout_marginRight="8dp"
+    android:layout_alignEnd="@id/imageView"
+    android:layout_alignTop="@id/editCollect"
+    android:layout_gravity="center"
+    android:layout_toLeftOf="@id/editCollect"
+    android:gravity="left"
+    android:textColor="#ffffff"
+    android:textSize="15sp"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/imageText"
-        android:layout_marginStart="69dp"
-        android:layout_marginBottom="7dp"
-        android:textColor="@color/primary_color"
-        android:text="Send Order"
-        android:id="@+id/button"
-        android:onClick="sendEmail"/>
+  <Button
+    android:id="@+id/button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="7dp"
+    android:layout_marginStart="69dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignStart="@+id/imageText"
+    android:onClick="sendEmail"
+    android:text="Send Order"
+    android:textColor="@color/primary_color"/>
 </RelativeLayout>

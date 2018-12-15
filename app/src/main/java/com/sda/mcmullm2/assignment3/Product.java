@@ -13,57 +13,57 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.sda.mcmullm2.assignment3;
 
 /**
- * {@link Product} represents a single product type.
- * Each object has 3 properties: name, price, and image resource ID.
+ * {@link Product} represents a single product type. Each object has 3 properties: name, price, and
+ * image resource ID.
  */
 public class Product {
 
-    // Name of the product (e.g. Polo T-Shirt, etc)
-    private String productName;
+  // Name of the product (e.g. Polo T-Shirt, etc)
+  private final String productName;
 
-    // Price of the product
-    private double productPrice;
+  // Price of the product
+  private final double productPrice;
 
-    // Drawable resource ID
-    private int productResourceId;
+  // Drawable resource ID
+  private final int productResourceId;
 
-    /**
-    * Create a new Product object.
-    *
-    * @param name is the name of the product (e.g. Polo T-Shirt)
-    * @param price is the corresponding price
-    * @param resourceId is drawable reference ID that corresponds to the product
-    * */
-    public Product(String name, double price, int resourceId)
-    {
-        productName = name;
-        productPrice = price;
-        productResourceId = resourceId;
-    }
+  /**
+   * Create a new Product object.
+   *
+   * @param name is the name of the product (e.g. Polo T-Shirt)
+   * @param price is the corresponding price
+   * @param resourceId is drawable reference ID that corresponds to the product
+   */
+  public Product(String name, double price, int resourceId) {
+    productName = name;
+    productPrice = price;
+    productResourceId = resourceId;
+  }
 
-    /**
-     * Get the name of the product
-     */
-    public String getProductName() {
-        return productName;
-    }
+  /**
+   * Get the name of the product.
+   */
+  public String getProductName() {
+    return productName;
+  }
 
-    /**
-     * Get the product price
-     */
-    public String getProductPrice() {
-        return String.format("€%,.2f", productPrice);
-    }
+  /**
+   * Get the product price.
+   */
+  public String getProductPrice() {
+    return String.format("€%,.2f", productPrice);
+  }
 
-    /**
-     * Get the image resource ID
-     */
-    public int getImageResourceId() {
-        return productResourceId;
-    }
+  /**
+   * Get the image resource ID.
+   */
+  public int getImageResourceId() {
+    return productResourceId;
+  }
 
 
 }

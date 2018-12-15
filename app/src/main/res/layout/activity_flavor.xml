@@ -15,14 +15,14 @@
 -->
 <!-- Layout for the main screen -->
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listview_flavor"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
-    android:columnWidth="100dp"
-    android:gravity="center"
-    android:horizontalSpacing="10dp"
-    android:numColumns="auto_fit"
-    android:padding="@dimen/activity_padding"
-    android:stretchMode="columnWidth"
-    android:verticalSpacing="10dp" />
+  android:id="@+id/listview_flavor"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="@dimen/activity_padding"
+  android:background="@android:color/darker_gray"
+  android:columnWidth="100dp"
+  android:gravity="center"
+  android:horizontalSpacing="10dp"
+  android:numColumns="auto_fit"
+  android:stretchMode="columnWidth"
+  android:verticalSpacing="10dp"/>
