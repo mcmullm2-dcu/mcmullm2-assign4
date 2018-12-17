@@ -2,15 +2,15 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/tan_background"
+  android:background="@android:color/darker_gray"
   android:orientation="vertical">
 
   <EditText
     android:id="@+id/editCustomer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="24dp"
-    android:hint="Enter Your Name"
+    android:layout_margin="@dimen/activity_padding"
+    android:hint="@string/customer_name_hint"
     android:imeOptions="actionDone"
     android:inputType="text"
     android:textColor="@color/primary_color"
@@ -37,7 +37,7 @@
     android:layout_alignBottom="@+id/imageView"
     android:layout_centerHorizontal="true"
     android:onClick="dispatchTakePictureIntent"
-    android:text="Take photo for T-Shirt"
+    android:text="@string/photo_instruction"
     android:textColor="#ffffff"
     android:textSize="20sp"
     />
@@ -51,7 +51,7 @@
     android:layout_marginRight="24dp"
     android:layout_alignEnd="@+id/imageView"
     android:layout_below="@+id/imageView"
-    android:hint="Delivery Address -or- For Collection"
+    android:hint="@string/delivery_instruction"
     android:inputType="textMultiLine"
     android:textColor="@color/primary_color"
     android:textColorHint="@color/primary_color"/>
@@ -91,6 +91,6 @@
     android:layout_alignParentBottom="true"
     android:layout_alignStart="@+id/imageText"
     android:onClick="sendEmail"
-    android:text="Send Order"
+    android:text="@string/button_place_order"
     android:textColor="@color/primary_color"/>
 </RelativeLayout>
