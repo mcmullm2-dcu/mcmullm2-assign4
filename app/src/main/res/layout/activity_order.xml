@@ -24,9 +24,9 @@
     android:layout_marginEnd="24dp"
     android:layout_alignStart="@+id/editCustomer"
     android:layout_below="@+id/editCustomer"
+    android:contentDescription="@string/accessibility_order_photo"
     android:onClick="dispatchTakePictureIntent"
     android:scaleType="centerCrop"
-    android:contentDescription="@string/accessibility_order_photo"
     app:srcCompat="@drawable/camera"/>
 
   <TextView
