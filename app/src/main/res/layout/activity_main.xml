@@ -28,11 +28,7 @@
     <Button
       android:id="@+id/colors"
       style="@style/HomeButtons"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
       android:layout_marginEnd="8dp"
-      android:background="@color/category_white"
       android:onClick="callList"
       android:text="Product List"
       />
@@ -40,11 +36,7 @@
     <Button
       android:id="@+id/family"
       style="@style/HomeButtons"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
       android:layout_marginStart="8dp"
-      android:background="@color/category_white"
       android:onClick="callOrder"
       android:text="Order T-Shirt"
       />

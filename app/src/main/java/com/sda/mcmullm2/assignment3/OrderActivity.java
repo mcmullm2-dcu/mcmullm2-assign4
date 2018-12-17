@@ -92,15 +92,14 @@ public class OrderActivity extends AppCompatActivity {
   private File createImageFile() throws IOException {
     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
-    String imageFileName = "my_t_shirt_image_" + timeStamp; // + ".jpg";
+    String imageFileName = "my_t_shirt_image_" + timeStamp;
 
     Log.i(TAG, "imagefile");
 
     // File file = new File(Environment.getExternalStorageDirectory(), imageFileName);
     File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-    File file = File.createTempFile(imageFileName, ".jpg", dir);
 
-    return file;
+    return File.createTempFile(imageFileName, ".jpg", dir);
   }
 
   /**

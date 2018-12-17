@@ -22,12 +22,16 @@
   </style>
 
   <style name="HomeButtons">
-    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
     <item name="android:gravity">center</item>
     <item name="android:textStyle">bold</item>
     <item name="android:fontFamily">sans-serif-condensed</item>
     <item name="android:textColor">@color/primary_color</item>
+    <item name="android:background">@color/light_accent</item>
     <item name="android:textAlignment">center</item>
+    <item name="android:paddingStart">@dimen/activity_padding</item>
+    <item name="android:paddingEnd">@dimen/activity_padding</item>
   </style>
 
 
