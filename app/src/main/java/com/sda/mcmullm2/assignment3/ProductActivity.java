@@ -35,7 +35,7 @@ public class ProductActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_flavor);
+    setContentView(R.layout.activity_product_list);
 
     // Create an ArrayList of Product objects
     final ArrayList<Product> products = new ArrayList<>();
@@ -61,7 +61,7 @@ public class ProductActivity extends AppCompatActivity {
     ProductAdapter flavorAdapter = new ProductAdapter(this, products);
 
     // Get a reference to the ListView, and attach the adapter to the listView.
-    GridView listView = findViewById(R.id.listview_flavor);
+    GridView listView = findViewById(R.id.listview_products);
     listView.setAdapter(flavorAdapter);
 
     // Add event listener to each item.
