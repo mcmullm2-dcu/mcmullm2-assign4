@@ -22,7 +22,6 @@
     <item>" 5"</item>
     <item>10</item>
     <item>14</item>
-
   </string-array>
   <string name="customer_name">Name</string>
   <string name="ready_time">Delivery/Collection in (days)</string>
@@ -32,6 +31,6 @@
   <string name="customer_name_blank">You did not enter your name.</string>
   <string name="to_email">my-tshirt@sda.ie</string>
   <string name="email_subject">Order Request </string>
-
-
+  <string name="button_product_list">Product List</string>
+  <string name="button_order_t_shirt">Order T-Shirt</string>
 </resources>

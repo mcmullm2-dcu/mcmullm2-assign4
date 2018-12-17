@@ -3,7 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:padding="16dp"
+  android:padding="@dimen/activity_padding"
   android:background="@color/primary_color"
   android:gravity="center"
   android:orientation="vertical">
@@ -21,24 +21,24 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="2"
-    android:padding="16dp"
+    android:padding="@dimen/activity_padding"
     android:gravity="center"
     android:orientation="horizontal">
 
     <Button
       android:id="@+id/colors"
       style="@style/HomeButtons"
-      android:layout_marginEnd="8dp"
+      android:layout_marginEnd="@dimen/activity_half_padding"
       android:onClick="callList"
-      android:text="Product List"
+      android:text="@string/button_product_list"
       />
 
     <Button
       android:id="@+id/family"
       style="@style/HomeButtons"
-      android:layout_marginStart="8dp"
+      android:layout_marginStart="@dimen/activity_half_padding"
       android:onClick="callOrder"
-      android:text="Order T-Shirt"
+      android:text="@string/button_order_t_shirt"
       />
   </LinearLayout>
 </LinearLayout>
