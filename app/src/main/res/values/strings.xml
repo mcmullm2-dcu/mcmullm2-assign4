@@ -37,4 +37,9 @@
   <string name="button_product_list">Product List</string>
   <string name="button_order_t_shirt">Order T-Shirt</string>
   <string name="button_place_order">Send Order</string>
+
+  <!-- Content Description strings for image accessibility -->
+  <string name="accessibility_main_logo">App logo</string>
+  <string name="accessibility_order_photo">Photo for t-shirt order</string>
+  <string name="accessibility_product_image">Product image</string>
 </resources>

@@ -32,6 +32,7 @@
     android:layout_height="@dimen/gridview_image_height"
     android:background="@color/product_item_background"
     android:cropToPadding="true"
+    android:contentDescription="@string/accessibility_product_image"
     />
 
   <TextView

@@ -15,7 +15,8 @@
     android:layout_height="0dp"
     android:layout_weight="3"
     android:layout_gravity="center"
-    app:srcCompat="@drawable/ic_logo_white_nobg"/>
+    app:srcCompat="@drawable/ic_logo_white_nobg"
+    android:contentDescription="@string/accessibility_main_logo"/>
 
   <LinearLayout
     android:layout_width="match_parent"
