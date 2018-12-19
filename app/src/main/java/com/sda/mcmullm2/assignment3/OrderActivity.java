@@ -170,21 +170,20 @@ public class OrderActivity extends AppCompatActivity {
    * Validates order form and launch populated email app.
    */
   public void sendEmail(View v) {
+    Log.i(TAG, "Starting sendEmail method");
 
     //check that Name is not empty, and ask do they want to continue
-    Log.i(TAG, "Email Attachment: " + photoUri.toString());
-
     String customerName = this.customerName.getText().toString().trim();
     this.customerName.setText(customerName);
 
-    if (customerName.matches("")) {
+    if (!isValidForm()) {
+      Log.i(TAG, "Starting isValidForm block");
       // Decided Toast wasn't prominent enough, using dialog instead.
       // Toast.makeText(this, getString(R.string.customer_name_blank), Toast.LENGTH_SHORT).show();
 
       // Display dialog with error message
       AlertDialog.Builder builder = new AlertDialog.Builder(this);
-      String message = getString(R.string.error_customer_name_blank);
-      builder.setTitle(R.string.validation_dialog_title).setMessage(message)
+      builder.setTitle(R.string.validation_dialog_title).setMessage(getValidationError())
           .setPositiveButton(R.string.validation_confirmation_button, null).show();
     } else {
       Intent intent = new Intent(Intent.ACTION_SEND);
@@ -199,5 +198,34 @@ public class OrderActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Determines whether or not the form contains valid data.
+   *
+   * @return true if the form contains valid input. Otherwise, false.
+   */
+  protected boolean isValidForm() {
+    if (this.customerName.getText().toString().matches("")) return false;
+    if (this.imgCaption.getText().toString().matches(getString(R.string.photo_instruction))) return false;
 
+    return true;
+  }
+
+  /**
+   * Constructs an error message to instruct users what to change.
+   *
+   * @return An error message based on incorrect user inputs.
+   */
+  protected String getValidationError() {
+    StringBuilder error = new StringBuilder();
+    if (this.customerName.getText().toString().matches("")) {
+      error.append(getString(R.string.error_customer_name_blank));
+      error.append("\n");
+    }
+    if (this.imgCaption.getText().toString().matches(getString(R.string.photo_instruction))) {
+      error.append(getString(R.string.error_photo_blank));
+      error.append("\n");
+    }
+
+    return error.toString();
+  }
 }
