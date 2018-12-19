@@ -134,9 +134,9 @@ public class OrderActivity extends AppCompatActivity {
       // Or perhaps do a dialog should only use one method i.e. toast or dialog, but have both code
       // here for demo purposes also I have strings in strings.xml but have hardcoded here to
       // copy/paste to students if needed.
-      AlertDialog.Builder builder = new AlertDialog.Builder(this);
-      builder.setTitle("Notification!").setMessage("Image saved successfully.")
-          .setPositiveButton("OK", null).show();
+      // AlertDialog.Builder builder = new AlertDialog.Builder(this);
+      // builder.setTitle("Notification!").setMessage("Image saved successfully.")
+      //     .setPositiveButton("OK", null).show();
     } else {
       Toast t = Toast.makeText(this, "Error taking photo", Toast.LENGTH_SHORT);
       t.show();
@@ -151,7 +151,7 @@ public class OrderActivity extends AppCompatActivity {
    */
   private String createOrderSummary() {
     String orderMessage =
-        getString(R.string.customer_name) + " " + customerName.getText().toString();
+        getString(R.string.customer_name) + ": " + customerName.getText().toString();
     orderMessage += "\n" + "\n" + getString(R.string.order_message_1);
     String optionalInstructions = editOptional.getText().toString();
 
