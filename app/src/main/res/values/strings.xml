@@ -31,7 +31,6 @@
   <string name="order_message_1">Please find my order attached</string>
   <string name="order_message_collect">I will collect it in </string>
   <string name="order_message_end">Regards</string>
-  <string name="customer_name_blank">You did not enter your name.</string>
   <string name="to_email">my-tshirt@sda.ie</string>
   <string name="email_subject">Order Request </string>
   <string name="button_product_list">Product List</string>
@@ -42,4 +41,10 @@
   <string name="accessibility_main_logo">App logo</string>
   <string name="accessibility_order_photo">Photo for t-shirt order</string>
   <string name="accessibility_product_image">Product image</string>
+
+  <!-- Error Messages -->
+  <string name="validation_dialog_title">Notification</string>
+  <string name="validation_confirmation_button">OK</string>
+  <string name="error_customer_name_blank">You did not enter your name.</string>
+
 </resources>

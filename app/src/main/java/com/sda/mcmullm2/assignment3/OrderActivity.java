@@ -164,7 +164,6 @@ public class OrderActivity extends AppCompatActivity {
 
   /**
    * Validates order form and launch populated email app.
-   * @param v
    */
   public void sendEmail(View v) {
 
@@ -173,12 +172,14 @@ public class OrderActivity extends AppCompatActivity {
 
     String customerName = this.customerName.getText().toString();
     if (customerName.matches("")) {
-      Toast.makeText(this, getString(R.string.customer_name_blank), Toast.LENGTH_SHORT).show();
+      // Decided Toast wasn't prominent enough, using dialog instead.
+      // Toast.makeText(this, getString(R.string.customer_name_blank), Toast.LENGTH_SHORT).show();
 
-      /* we can also use a dialog
+      // Display dialog with error message
       AlertDialog.Builder builder = new AlertDialog.Builder(this);
-      builder.setTitle("Notification!").setMessage("Customer Name not set.").setPositiveButton("OK", null).show();
-      */
+      String message = getString(R.string.error_customer_name_blank);
+      builder.setTitle(R.string.validation_dialog_title).setMessage(message)
+          .setPositiveButton(R.string.validation_confirmation_button, null).show();
     } else {
       Intent intent = new Intent(Intent.ACTION_SEND);
       intent.setType("*/*");
