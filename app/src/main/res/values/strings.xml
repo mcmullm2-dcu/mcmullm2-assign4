@@ -25,7 +25,6 @@
   </string-array>
   <string name="customer_name">Name</string>
   <string name="customer_name_hint">Enter Your Name</string>
-  <string name="photo_instruction">Take photo for T-Shirt</string>
   <string name="delivery_instruction">Delivery Address -or- For Collection</string>
   <string name="ready_time">Delivery/Collection in (days)</string>
   <string name="order_message_1">Please find my order attached</string>
@@ -36,6 +35,11 @@
   <string name="button_product_list">Product List</string>
   <string name="button_order_t_shirt">Order T-Shirt</string>
   <string name="button_place_order">Send Order</string>
+
+  <!-- Photo feedback -->
+  <string name="photo_instruction">Take photo for T-Shirt</string>
+  <string name="photo_success">Photo Taken successfully</string>
+  <string name="photo_new_message">Click to replace photo</string>
 
   <!-- Content Description strings for image accessibility -->
   <string name="accessibility_main_logo">App logo</string>

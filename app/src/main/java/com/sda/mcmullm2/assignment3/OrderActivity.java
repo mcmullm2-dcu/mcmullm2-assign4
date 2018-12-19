@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,6 +39,7 @@ public class OrderActivity extends AppCompatActivity {
   private EditText customerName;
   private EditText editOptional;
   private ImageView imgThumbnail;
+  private TextView imgCaption;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class OrderActivity extends AppCompatActivity {
     spinner = findViewById(R.id.spinner);
     customerName = findViewById(R.id.editCustomer);
     imgThumbnail = findViewById(R.id.imageView);
+    imgCaption = findViewById(R.id.imageText);
 
     // Create an ArrayAdapter using the string array and a default spinner layout
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -124,7 +127,8 @@ public class OrderActivity extends AppCompatActivity {
 
       //let user know that image saved
       //I have strings in strings.xml but have hardcoded here to copy/paste to students if needed
-      CharSequence text = "Image Taken successfully";
+      CharSequence text = getString(R.string.photo_success);
+      imgCaption.setText(R.string.photo_new_message);
       int duration = Toast.LENGTH_SHORT;
       Log.i(TAG, photoUri.toString());
 
