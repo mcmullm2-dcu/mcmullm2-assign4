@@ -170,7 +170,9 @@ public class OrderActivity extends AppCompatActivity {
     //check that Name is not empty, and ask do they want to continue
     Log.i(TAG, "Email Attachment: " + photoUri.toString());
 
-    String customerName = this.customerName.getText().toString();
+    String customerName = this.customerName.getText().toString().trim();
+    this.customerName.setText(customerName);
+
     if (customerName.matches("")) {
       // Decided Toast wasn't prominent enough, using dialog instead.
       // Toast.makeText(this, getString(R.string.customer_name_blank), Toast.LENGTH_SHORT).show();
