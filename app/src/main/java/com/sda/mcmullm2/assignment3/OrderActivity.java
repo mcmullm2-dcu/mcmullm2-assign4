@@ -78,7 +78,7 @@ public class OrderActivity extends AppCompatActivity {
    * A reference to the {@link EditText} View used for entering customer's address in the layout XML
    * file.
    */
-  private EditText editOptional;
+  private EditText editDelivery;
 
   /**
    * A reference to the {@link ImageView} used for displaying the user's photo (or default image) in
@@ -109,15 +109,16 @@ public class OrderActivity extends AppCompatActivity {
     setContentView(R.layout.activity_order);
 
     // Get a reference to the address EditText view and initialise some properties.
-    editOptional = findViewById(R.id.editOptional);
-    editOptional.setImeOptions(EditorInfo.IME_ACTION_DONE);
-    editOptional.setRawInputType(InputType.TYPE_CLASS_TEXT);
+    editDelivery = findViewById(R.id.editOptional);
+    editDelivery.setImeOptions(EditorInfo.IME_ACTION_DONE);
+    editDelivery.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
     // Get a reference to the remaining Views in the layout file.
     spinner = findViewById(R.id.spinner);
     customerName = findViewById(R.id.editCustomer);
     imgThumbnail = findViewById(R.id.imageView);
     imgCaption = findViewById(R.id.imageText);
+    editDelivery = findViewById(R.id.editOptional);
 
     // Create an ArrayAdapter using the resource string array and a default spinner layout
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -241,16 +242,50 @@ public class OrderActivity extends AppCompatActivity {
    * @return Email Body Message
    */
   private String createOrderSummary() {
-    String orderMessage =
-        getString(R.string.customer_name) + ": " + customerName.getText().toString();
-    orderMessage += "\n" + "\n" + getString(R.string.order_message_1);
-    String optionalInstructions = editOptional.getText().toString();
+    // Original code replaced with StringBuilder
+    StringBuilder message = new StringBuilder();
 
-    orderMessage += "\n" + getString(R.string.order_message_collect) + ((CharSequence) spinner
-        .getSelectedItem()).toString() + " days";
-    orderMessage +=
-        "\n" + getString(R.string.order_message_end) + "\n" + customerName.getText().toString();
-    return orderMessage;
+    // Add customer's name
+    message.append(getString(R.string.customer_name));
+    message.append(": ");
+    message.append(customerName.getText().toString());
+    message.append("\n\n");
+
+    // Introduction paragraph
+    message.append(getString(R.string.order_message_1));
+    message.append("\n");
+
+    // Delivery instructions
+    String delivery = editDelivery.getText().toString().trim();
+    int deliveryTime = Integer.parseInt(((CharSequence) spinner.getSelectedItem()).toString().trim());
+
+    if (delivery.matches("")) {
+      // For collection
+      message.append(getString(R.string.order_message_collect));
+      message.append(" ");
+      message.append(deliveryTime);
+      message.append(" ");
+      message.append(getString(R.string.order_message_days));
+    } else {
+      // For delivery
+      message.append(getString(R.string.order_message_deliver));
+      message.append("\n");
+      message.append(delivery);
+      message.append("\n");
+      message.append(getString(R.string.order_message_deliver_time));
+      message.append(" ");
+      message.append(deliveryTime);
+      message.append(" ");
+      message.append(getString(R.string.order_message_days));
+    }
+
+    // Sign off message
+    message.append("\n\n");
+    message.append(getString(R.string.order_message_end));
+    message.append("\n");
+    message.append(customerName.getText().toString());
+
+    return message.toString();
   }
 
   /**
