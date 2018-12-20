@@ -12,6 +12,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * =======================================================================================
+ *
+ * Changes to the original code by Michael McMullin:
+ * - New JavaDoc comments.
+ * - Refactored code to meet Google Java Style Guide:
+ *   - https://google.github.io/styleguide/javaguide.html
+ *   - Replaces Hungarian notation.
+ *   - Uses two-space indents.
  */
 
 package com.sda.mcmullm2.assignment3;
@@ -26,11 +35,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * {@link ProductAdapter} is an {@link ArrayAdapter} that can provide the layout for each list
- * based on a data source, which is a list of {@link Product} objects.
- * */
+ * {@link ProductAdapter} is an {@link ArrayAdapter} that can provide the layout for each list based
+ * on a data source, which is a list of {@link Product} objects.
+ */
 public class ProductAdapter extends ArrayAdapter<Product> {
 
+  /**
+   * An identifying tag used for filtering log messages, if required.
+   */
   private static final String LOG_TAG = ProductAdapter.class.getSimpleName();
 
   /**
@@ -42,7 +54,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
    */
   public ProductAdapter(Activity context, ArrayList<Product> products) {
     // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
-    // the second argument is used when the ArrayAdapter is populating a single TextView.
+    // The second argument is used when the ArrayAdapter is populating a single TextView.
     // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
     // going to use this second argument, so it can be any value. Here, we used 0.
     super(context, 0, products);
@@ -66,29 +78,29 @@ public class ProductAdapter extends ArrayAdapter<Product> {
           R.layout.list_item, parent, false);
     }
 
-    // Get the {@link Product} object located at this position in the list
+    // Get the Product object located at this position in the list
     Product currentProduct = getItem(position);
 
-    // Find the TextView in the list_item.xml layout with the ID product_name
+    // Find the TextView in the list_item.xml layout with the ID product_name.
     TextView nameTextView = listItemView.findViewById(R.id.product_name);
-    // Get the name from the current Product object and
-    // set this text on the name TextView
+
+    // Get the name from the current Product object and set this text on the name TextView.
     nameTextView.setText(currentProduct.getProductName());
 
     // Find the TextView in the list_item.xml layout with the ID product_price
     TextView priceTextView = listItemView.findViewById(R.id.product_price);
-    // Get the price from the current Product object and
-    // set this text on the price TextView
+
+    // Get the price from the current Product object and set this text on the price TextView.
     priceTextView.setText(currentProduct.getProductPrice());
 
-    // Find the ImageView in the list_item.xml layout with the ID list_item_icon
+    // Find the ImageView in the list_item.xml layout with the ID list_item_icon.
     ImageView iconView = listItemView.findViewById(R.id.list_item_icon);
-    // Get the image resource ID from the current Product object and
-    // set the image to iconView
+
+    // Get the image resource ID from the current Product object and set the image to iconView.
     iconView.setImageResource(currentProduct.getImageResourceId());
 
-    // Return the whole list item layout (containing 2 TextViews and an ImageView)
-    // so that it can be shown in the ListView
+    // Return the whole list item layout (containing 2 TextViews and an ImageView) so that it can be
+    // shown in the GridView
     return listItemView;
   }
 }
