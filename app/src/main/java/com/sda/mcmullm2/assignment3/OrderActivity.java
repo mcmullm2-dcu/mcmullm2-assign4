@@ -43,10 +43,8 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -111,10 +109,10 @@ public class OrderActivity extends AppCompatActivity {
   /**
    * Called when {@link OrderActivity} is started, initialising the Activity and inflating the
    * appropriate XML layout.
-   * <p>
-   * This method initialises class-level references to various View objects that need to be accessed
-   * in other methods. It also populates the {@link Spinner} AdapterView with values from a String
-   * array stored in strings.xml.
+   *
+   * <p>This method initialises class-level references to various View objects that need to be
+   * accessed in other methods. It also populates the {@link Spinner} AdapterView with values from a
+   * String array stored in strings.xml.
    *
    * @param savedInstanceState Used if this Activity is re-initialised, where it contains the
    *     most recently available data (or null).
@@ -148,8 +146,8 @@ public class OrderActivity extends AppCompatActivity {
 
   /**
    * Launches the Camera app, and prepares for returning the photo.
-   * <p>
-   * As this app is targeting API 28, there are now restrictions on using local files. The new
+   *
+   * <p>As this app is targeting API 28, there are now restrictions on using local files. The new
    * techniques are described in the following links, which were referred to in order to fix the
    * original method that targeted API 23 and below:
    * <ul>
@@ -162,10 +160,8 @@ public class OrderActivity extends AppCompatActivity {
    * @param v The View that was clicked to trigger this method (the photo in this case)
    */
   public void dispatchTakePictureIntent(View v) {
-    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
     // Initialise the File object to store the photo returned by the camera app.
-    File file = null;
+    File file;
     try {
       // Get a reference to the File used to store the returned photo.
       file = createImageFile();
@@ -185,6 +181,7 @@ public class OrderActivity extends AppCompatActivity {
     Log.i(TAG, photoUri.toString());
 
     // Store the photo URI as extra data in the Intent.
+    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
 
     // Launch the external camera app's activity and indicate we want to receive its result.
@@ -214,8 +211,8 @@ public class OrderActivity extends AppCompatActivity {
 
   /**
    * Handles the returned data from the Camera app.
-   * <p>
-   * Reference: <a href="https://developer.android.com/training/camera/photobasics#java">Source</a>
+   *
+   * <p>Reference: <a href="https://developer.android.com/training/camera/photobasics#java">Source</a>
    *
    * @param requestCode The request code sent to the Activity through the
    *     startActivityForResult() method.
@@ -256,8 +253,8 @@ public class OrderActivity extends AppCompatActivity {
 
   /**
    * Creates a summary of the order details, ready to use in the email message body.
-   * <p>
-   * Email body message is created using user-input form data.
+   *
+   * <p>Email body message is created using user-input form data.
    *
    * @return Email Body Message
    */
@@ -277,8 +274,10 @@ public class OrderActivity extends AppCompatActivity {
 
     // Delivery instructions
     String delivery = fixAddress(editDelivery.getText().toString());
-    int deliveryTime = Integer.parseInt(((CharSequence) spinner.getSelectedItem()).toString().trim());
-    String daysText = getString(deliveryTime == 1 ? R.string.order_message_day : R.string.order_message_days);
+    int deliveryTime = Integer.parseInt(
+        ((CharSequence) spinner.getSelectedItem()).toString().trim());
+    String daysText = getString(deliveryTime == 1
+        ? R.string.order_message_day : R.string.order_message_days);
 
     if (delivery.matches("")) {
       // For collection
@@ -310,21 +309,24 @@ public class OrderActivity extends AppCompatActivity {
    */
   private String fixAddress(String address) {
     String output = address.trim();
+    StringBuilder sb = new StringBuilder();
 
     if (!output.matches("")) {
       String[] lines = output.split("\n");
-      output = "";
 
       for (String s : lines) {
         String line = s.trim();
         // Check if the line is blank, or only contains a comma / full-stop.
         if (!line.matches("^$|^,$|^\\.$")) {
-          output += line + "\n";
+          sb.append(line).append("\n");
         }
       }
     }
+    output = sb.toString();
+
     return output.trim();
   }
+
   /**
    * Validates order form and launch populated email app.
    *
@@ -369,15 +371,9 @@ public class OrderActivity extends AppCompatActivity {
    *
    * @return {@code true} if the form contains valid input. Otherwise, {@code false}.
    */
-  protected boolean isValidForm() {
-    if (this.customerName.getText().toString().matches("")) {
-      return false;
-    }
-    if (this.imgCaption.getText().toString().matches(getString(R.string.photo_instruction))) {
-      return false;
-    }
-
-    return true;
+  private boolean isValidForm() {
+    return !this.customerName.getText().toString().matches("")
+        && !this.imgCaption.getText().toString().matches(getString(R.string.photo_instruction));
   }
 
   /**
@@ -385,7 +381,7 @@ public class OrderActivity extends AppCompatActivity {
    *
    * @return An error message based on incorrect user inputs.
    */
-  protected String getValidationError() {
+  private String getValidationError() {
     StringBuilder error = new StringBuilder();
 
     // Handle empty customer name.
