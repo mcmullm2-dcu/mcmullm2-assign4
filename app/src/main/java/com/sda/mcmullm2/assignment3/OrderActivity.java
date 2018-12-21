@@ -260,7 +260,7 @@ public class OrderActivity extends AppCompatActivity {
     message.append("\n");
 
     // Delivery instructions
-    String delivery = editDelivery.getText().toString().trim();
+    String delivery = fixAddress(editDelivery.getText().toString());
     int deliveryTime = Integer.parseInt(((CharSequence) spinner.getSelectedItem()).toString().trim());
 
     if (delivery.matches("")) {
@@ -275,7 +275,7 @@ public class OrderActivity extends AppCompatActivity {
       message.append(getString(R.string.order_message_deliver));
       message.append("\n");
       message.append(delivery);
-      message.append("\n");
+      message.append("\n\n");
       message.append(getString(R.string.order_message_deliver_time));
       message.append(" ");
       message.append(deliveryTime);
@@ -292,6 +292,28 @@ public class OrderActivity extends AppCompatActivity {
     return message.toString();
   }
 
+  /**
+   * Cleans up a user's address input.
+   * @param address The address entered by the user through the order form.
+   * @return A formatted version of the user's address.
+   */
+  private String fixAddress(String address) {
+    String output = address.trim();
+
+    if (!output.matches("")) {
+      String[] lines = output.split("\n");
+      output = "";
+
+      for (String s : lines) {
+        String line = s.trim();
+        // Check if the line is blank, or only contains a comma / full-stop.
+        if (!line.matches("^$|^,$|^\\.$")) {
+          output += line + "\n";
+        }
+      }
+    }
+    return output.trim();
+  }
   /**
    * Validates order form and launch populated email app.
    *
