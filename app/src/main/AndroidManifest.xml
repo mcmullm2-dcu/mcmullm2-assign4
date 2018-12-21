@@ -45,22 +45,11 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <!--
-    Using configChanges to handle screen rotation on the order page to ensure photo remains:
-    https://stackoverflow.com/questions/19856359/imageview-not-retaining-image-when-screen-rotation-occurs
-
-    However, it's not recommended due to the 'hidden complexity' involved, according to the
-    development documentation:
-    https://developer.android.com/guide/topics/resources/runtime-changes
-
-    I'm only using it here to meet the deadline, and it seems to be performing ok on this app, but
-    if I have time, I'll revise the onCreate method instead.
-    -->
     <activity
       android:label="Order T-Shirt"
       android:name="com.sda.mcmullm2.assignment3.OrderActivity"
       android:parentActivityName="com.sda.mcmullm2.assignment3.MainActivity"
-      android:configChanges="keyboard|orientation|screenSize">
+      >
     </activity>
   </application>
 

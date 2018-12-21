@@ -144,6 +144,54 @@ public class OrderActivity extends AppCompatActivity {
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
         R.array.ui_time_entries, R.layout.spinner_days);
     spinner.setAdapter(adapter);
+
+    // Restore image data if necessary
+    if (savedInstanceState != null) {
+      initPhoto(savedInstanceState.getString("imagePath"));
+    }
+  }
+
+  /**
+   * When this Activity needs to be recreated, this method gives an opportunity to save some data
+   * that can be restored again later.
+   *
+   * <p>In this case, we're saving the path to a photo that the user has taken so that it can be
+   * reloaded in the onCreate method. This allows us to rotate the screen without reverting back to
+   * the default image.
+   *
+   * <p>Reference: https://developer.android.com/guide/components/activities/activity-lifecycle#java
+   *
+   * @param state A bundle of key/value pairs to store our app's state.
+   */
+  @Override
+  protected void onSaveInstanceState(Bundle state) {
+    if (isPhotoTaken()) {
+      String fileName = imageFile.getPath();
+      state.putString("imagePath", fileName);
+    }
+    super.onSaveInstanceState(state);
+  }
+
+  /**
+   * Re-initialise the user's photo and related data based on a supplied filepath.
+   *
+   * @param filepath The path to the user's photo.
+   */
+  private void initPhoto(String filepath) {
+    if (filepath.matches("")) return;
+
+    try {
+      imageFile = new File(filepath);
+      InputStream ims = new FileInputStream(imageFile);
+      imgThumbnail.setImageBitmap(BitmapFactory.decodeStream(ims));
+      imgCaption.setText(R.string.photo_new_message);
+      photoPath = imageFile.getAbsolutePath();
+      photoUri = FileProvider.getUriForFile(OrderActivity.this,
+          BuildConfig.APPLICATION_ID + ".provider",
+          imageFile);
+    } catch (FileNotFoundException ex) {
+      Log.e(TAG, ex.getMessage());
+    }
   }
 
   /**
@@ -163,21 +211,19 @@ public class OrderActivity extends AppCompatActivity {
    */
   public void dispatchTakePictureIntent(View v) {
     // Initialise the File object to store the photo returned by the camera app.
-    File file;
     try {
       // Get a reference to the File used to store the returned photo.
-      file = createImageFile();
+      imageFile = createImageFile();
     } catch (IOException ex) {
       // If a File can't be created, log the exception and return.
       Log.e(TAG, ex.getMessage());
       return;
     }
 
-    photoPath = file.getAbsolutePath();
-
+    photoPath = imageFile.getAbsolutePath();
     photoUri = FileProvider.getUriForFile(OrderActivity.this,
         BuildConfig.APPLICATION_ID + ".provider",
-        file);
+        imageFile);
 
     // DEBUG: make sure photoUri is being set correctly.
     Log.i(TAG, photoUri.toString());
@@ -227,21 +273,11 @@ public class OrderActivity extends AppCompatActivity {
     // Make sure we're handling the correct request, and that it returned OK from the camera app.
     if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
       // Show the thumbnail on ImageView
-      Uri imageUri = Uri.parse(photoPath);
-      imageFile = new File(imageUri.getPath());
-      try {
-        InputStream ims = new FileInputStream(imageFile);
-        imgThumbnail.setImageBitmap(BitmapFactory.decodeStream(ims));
-      } catch (FileNotFoundException ex) {
-        // If the photo File can't be found, log the exception and return.
-        Log.e(TAG, ex.getMessage());
-        return;
-      }
+      initPhoto(photoPath);
 
       // Let user know that image saved correctly using a Toast message. I removed the dialog as it
       // seemed too intrusive.
       CharSequence text = getString(R.string.photo_success);
-      imgCaption.setText(R.string.photo_new_message);
       int duration = Toast.LENGTH_SHORT;
       Log.i(TAG, photoUri.toString());
 
@@ -375,7 +411,7 @@ public class OrderActivity extends AppCompatActivity {
    */
   private boolean isValidForm() {
     return !this.customerName.getText().toString().matches("")
-        && !isPhotoTaken();
+        && isPhotoTaken();
   }
 
   /**
@@ -384,7 +420,6 @@ public class OrderActivity extends AppCompatActivity {
    * @return {@code true} if the user has taken a photo. Otherwise, {@code false}
    */
   private boolean isPhotoTaken() {
-    // return this.imgCaption.getText().toString().matches(getString(R.string.photo_instruction));
     return imageFile != null;
   }
 
