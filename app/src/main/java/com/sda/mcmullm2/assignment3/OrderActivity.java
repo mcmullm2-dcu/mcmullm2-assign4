@@ -262,25 +262,20 @@ public class OrderActivity extends AppCompatActivity {
     // Delivery instructions
     String delivery = fixAddress(editDelivery.getText().toString());
     int deliveryTime = Integer.parseInt(((CharSequence) spinner.getSelectedItem()).toString().trim());
+    String daysText = getString(deliveryTime == 1 ? R.string.order_message_day : R.string.order_message_days);
 
     if (delivery.matches("")) {
       // For collection
-      message.append(getString(R.string.order_message_collect));
-      message.append(" ");
-      message.append(deliveryTime);
-      message.append(" ");
-      message.append(getString(R.string.order_message_days));
+      message.append(getString(R.string.order_message_collect)).append(" ");
+      message.append(deliveryTime).append(" ");
+      message.append(daysText);
     } else {
       // For delivery
-      message.append(getString(R.string.order_message_deliver));
-      message.append("\n");
-      message.append(delivery);
-      message.append("\n\n");
-      message.append(getString(R.string.order_message_deliver_time));
-      message.append(" ");
-      message.append(deliveryTime);
-      message.append(" ");
-      message.append(getString(R.string.order_message_days));
+      message.append(getString(R.string.order_message_deliver)).append("\n");
+      message.append(delivery).append("\n\n");
+      message.append(getString(R.string.order_message_deliver_time)).append(" ");
+      message.append(deliveryTime).append(" ");
+      message.append(daysText);
     }
 
     // Sign off message
