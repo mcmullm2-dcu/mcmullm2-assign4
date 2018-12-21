@@ -71,10 +71,7 @@ public class OrderActivity extends AppCompatActivity {
    * An identifying tag used for filtering log messages, if required.
    */
   private static final String TAG = "Assign3";
-
   private Uri photoUri;
-
-
   private String photoPath;
 
   /**
@@ -99,6 +96,11 @@ public class OrderActivity extends AppCompatActivity {
    * the layout XML file.
    */
   private ImageView imgThumbnail;
+
+  /**
+   * A reference to the {@Link File} object used for saving the user's photo.
+   */
+  private File imageFile;
 
   /**
    * A reference to the {@link TextView} used for displaying a caption on the photo in the layout
@@ -226,9 +228,9 @@ public class OrderActivity extends AppCompatActivity {
     if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
       // Show the thumbnail on ImageView
       Uri imageUri = Uri.parse(photoPath);
-      File file = new File(imageUri.getPath());
+      imageFile = new File(imageUri.getPath());
       try {
-        InputStream ims = new FileInputStream(file);
+        InputStream ims = new FileInputStream(imageFile);
         imgThumbnail.setImageBitmap(BitmapFactory.decodeStream(ims));
       } catch (FileNotFoundException ex) {
         // If the photo File can't be found, log the exception and return.
@@ -373,7 +375,17 @@ public class OrderActivity extends AppCompatActivity {
    */
   private boolean isValidForm() {
     return !this.customerName.getText().toString().matches("")
-        && !this.imgCaption.getText().toString().matches(getString(R.string.photo_instruction));
+        && !isPhotoTaken();
+  }
+
+  /**
+   * Determines whether or not the user has taken a photo.
+   *
+   * @return {@code true} if the user has taken a photo. Otherwise, {@code false}
+   */
+  private boolean isPhotoTaken() {
+    // return this.imgCaption.getText().toString().matches(getString(R.string.photo_instruction));
+    return imageFile != null;
   }
 
   /**
@@ -391,8 +403,7 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     // Handle empty image data.
-    // TODO: Currently just checking caption. Change to more robust file checking.
-    if (this.imgCaption.getText().toString().matches(getString(R.string.photo_instruction))) {
+    if (!isPhotoTaken()) {
       error.append(getString(R.string.error_photo_blank));
       error.append("\n");
     }
