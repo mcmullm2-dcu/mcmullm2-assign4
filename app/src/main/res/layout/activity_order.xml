@@ -1,94 +1,105 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
+<!--
+Updated original layout to create a scrollable interface. This helps get around problems
+with views overlapping when moving between portrait and landscape.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:padding="@dimen/activity_padding"
-  android:orientation="vertical">
-
-  <EditText
-    android:id="@+id/editCustomer"
+  android:layout_height="match_parent">
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="@string/customer_name_hint"
-    android:inputType="text"
-    android:imeOptions="actionDone"
-    />
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_padding"
+    android:orientation="vertical">
 
-  <ImageView
-    android:id="@+id/imageView"
-    android:layout_width="match_parent"
-    android:layout_height="170dp"
-    android:layout_marginTop="@dimen/activity_padding"
-    android:layout_below="@+id/editCustomer"
-    android:elevation="@dimen/activity_half_padding"
-    android:contentDescription="@string/accessibility_order_photo"
-    android:onClick="dispatchTakePictureIntent"
-    android:scaleType="centerCrop"
-    app:srcCompat="@drawable/camera"/>
-
-  <TextView
-    android:id="@+id/imageText"
-    android:textStyle="bold"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignBottom="@+id/imageView"
-    android:layout_centerHorizontal="true"
-    android:elevation="@dimen/activity_half_padding"
-    android:onClick="dispatchTakePictureIntent"
-    android:text="@string/photo_instruction"
-    android:textColor="@color/light_accent"
-    android:textSize="20sp"
-    />
-
-  <EditText
-    android:id="@+id/editOptional"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="top"
-    android:layout_marginTop="@dimen/activity_padding"
-    android:layout_below="@+id/imageView"
-    android:hint="@string/delivery_instruction"
-    android:inputType="textMultiLine"
-    android:lines="3"
-    />
-
-  <LinearLayout
-    android:id="@+id/collect_wrapper"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/editOptional"
-    android:layout_marginVertical="@dimen/activity_padding"
-    android:orientation="horizontal">
-    <TextView
-      android:id="@+id/editCollect"
-      android:layout_width="256dp"
+    <EditText
+      android:id="@+id/editCustomer"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/ready_time"
-      android:textSize="18sp"/>
-    <Space
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:layout_weight="1"
+      android:hint="@string/customer_name_hint"
+      android:imeOptions="actionDone"
+      android:inputType="text"
       />
-    <Spinner
-      android:id="@+id/spinner"
+
+    <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="match_parent"
+      android:layout_height="170dp"
+      android:layout_marginTop="@dimen/activity_padding"
+      android:layout_below="@+id/editCustomer"
+      android:contentDescription="@string/accessibility_order_photo"
+      android:elevation="@dimen/activity_half_padding"
+      android:onClick="dispatchTakePictureIntent"
+      android:scaleType="centerCrop"
+      app:srcCompat="@drawable/camera"/>
+
+    <TextView
+      android:id="@+id/imageText"
+      android:textStyle="bold"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="end"
-      android:gravity="end"
+      android:layout_alignBottom="@+id/imageView"
+      android:layout_centerHorizontal="true"
+      android:elevation="@dimen/activity_half_padding"
+      android:onClick="dispatchTakePictureIntent"
+      android:text="@string/photo_instruction"
+      android:textColor="@color/light_accent"
+      android:textSize="20sp"
       />
-  </LinearLayout>
 
-  <Button
-    android:id="@+id/button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/collect_wrapper"
-    android:layout_alignParentRight="true"
-    android:padding="@dimen/activity_padding"
-    android:layout_marginTop="@dimen/activity_padding"
-    android:onClick="sendEmail"
-    android:text="@string/button_place_order"
-    android:textColor="@color/light_accent"
-    android:background="@color/primary_color"/>
-</RelativeLayout>
+    <EditText
+      android:id="@+id/editOptional"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_padding"
+      android:layout_below="@+id/imageView"
+      android:gravity="top"
+      android:hint="@string/delivery_instruction"
+      android:inputType="textMultiLine"
+      android:lines="3"
+      />
+
+    <LinearLayout
+      android:id="@+id/collect_wrapper"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/editOptional"
+      android:layout_marginVertical="@dimen/activity_padding"
+      android:orientation="horizontal">
+      <TextView
+        android:id="@+id/editCollect"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ready_time"
+        android:textSize="18sp"/>
+      <!-- Space helps to push the spinner to the right.
+        https://stackoverflow.com/questions/6992804/how-to-right-align-widget-in-horizontal-linear-layout-android
+        -->
+      <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+      <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:gravity="end"
+        />
+    </LinearLayout>
+
+    <Button
+      android:id="@+id/button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/activity_padding"
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/collect_wrapper"
+      android:padding="@dimen/activity_padding"
+      android:background="@color/primary_color"
+      android:onClick="sendEmail"
+      android:text="@string/button_place_order"
+      android:textColor="@color/light_accent"/>
+  </RelativeLayout>
+</ScrollView>
