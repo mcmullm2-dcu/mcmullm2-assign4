@@ -108,10 +108,14 @@ public class OrderActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_order);
 
-    // Get a reference to the address EditText view and initialise some properties.
+    // Get a reference to the address EditText view. The original version also set some IME options,
+    // but this prevented the 'newline' button from appearing on the keyboard, which I felt
+    // defeated the purpose of having a multiline text box, at least in the context of an address.
+    // This version requires users to dismiss the keyboard by clicking on another field, or using
+    // the phone's back button. Online opinions suggest this is standard, familiar practice,
+    // although I suspect it might be troublesome for some users. Having both 'Return' and 'Done'
+    // buttons would be better I think, but I couldn't figure out how to do that yet.
     editDelivery = findViewById(R.id.editOptional);
-    editDelivery.setImeOptions(EditorInfo.IME_ACTION_DONE);
-    editDelivery.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
     // Get a reference to the remaining Views in the layout file.
     spinner = findViewById(R.id.spinner);
