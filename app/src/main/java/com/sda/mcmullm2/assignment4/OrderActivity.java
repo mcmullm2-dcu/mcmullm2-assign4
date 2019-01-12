@@ -32,7 +32,7 @@
  *   - Uses two-space indents.
  */
 
-package com.sda.mcmullm2.assignment3;
+package com.sda.mcmullm2.assignment4;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;

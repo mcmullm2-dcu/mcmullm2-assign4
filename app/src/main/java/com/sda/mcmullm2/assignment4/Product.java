@@ -23,7 +23,7 @@
  *   - Uses two-space indents.
  */
 
-package com.sda.mcmullm2.assignment3;
+package com.sda.mcmullm2.assignment4;
 
 /**
  * {@link Product} represents a single product type. Each object has 3 properties: name, price, and

@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.sda.mcmullm2.assignment3.R;
 
 public class Tab3Fragment extends Fragment {
   @Override

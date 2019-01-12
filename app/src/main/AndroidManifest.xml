@@ -22,7 +22,6 @@
     android:icon="@drawable/ic_logo_red_nobg"
     android:label="@string/app_name"
     android:theme="@style/AppTheme">
-
     <provider
       android:authorities="${applicationId}.provider"
       android:exported="false"
@@ -35,10 +34,10 @@
 
     <activity
       android:label="Product List"
-      android:name="com.sda.mcmullm2.assignment3.ProductActivity"
-      android:parentActivityName="com.sda.mcmullm2.assignment3.MainActivity">
+      android:name="com.sda.mcmullm2.assignment4.ProductActivity"
+      android:parentActivityName="com.sda.mcmullm2.assignment4.MainActivity">
     </activity>
-    <activity android:name="com.sda.mcmullm2.assignment3.MainActivity">
+    <activity android:name="com.sda.mcmullm2.assignment4.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -47,9 +46,10 @@
     </activity>
     <activity
       android:label="Order T-Shirt"
-      android:name="com.sda.mcmullm2.assignment3.OrderActivity"
-      android:parentActivityName="com.sda.mcmullm2.assignment3.MainActivity"
-      >
+      android:name="com.sda.mcmullm2.assignment4.OrderActivity"
+      android:parentActivityName="com.sda.mcmullm2.assignment4.MainActivity">
+    </activity>
+    <activity android:name="com.sda.mcmullm2.assignment4.MainTabbedActivity">
     </activity>
   </application>
 
