@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <resources>
-  <string name="app_name">SDA​​ ​Assign3 2018 Michael McMullin</string>
+  <string name="app_name">SDA​​ ​Assign4 2019 Michael McMullin</string>
   <string-array name="ui_time_entries">
     <item>" 1"</item>
     <item>" 2"</item>
@@ -56,5 +56,11 @@
   <string name="validation_confirmation_button">OK</string>
   <string name="error_customer_name_blank">You did not enter your name.</string>
   <string name="error_photo_blank">You must include a photo.</string>
+
+  <!-- Tab names -->
+  <string name="tab_1_title">Tab 1</string>
+  <string name="tab_2_title">Tab 2</string>
+  <string name="tab_3_title">Tab 3</string>
+  <string name="tab_4_title">Tab 4</string>
 
 </resources>
