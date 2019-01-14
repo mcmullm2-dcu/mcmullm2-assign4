@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.sda.mcmullm2.assignment3">
+  package="com.sda.mcmullm2.assignment4">
 
   <application
     android:allowBackup="true"
