@@ -1,14 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/home_fragment"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.sda.mcmullm2.assignment4.FragmentHome">
+  android:padding="@dimen/activity_padding"
+  android:background="@color/primary_color"
+  android:gravity="center"
+  android:orientation="vertical">
 
-  <!-- TODO: Update blank fragment layout -->
-  <TextView
+
+  <ImageView
+    android:id="@+id/imageView3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="@string/hello_blank_fragment"/>
+    android:layout_height="0dp"
+    android:layout_weight="3"
+    android:layout_gravity="center"
+    android:contentDescription="@string/accessibility_main_logo"
+    app:srcCompat="@drawable/ic_logo_white_nobg"/>
 
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="2"
+    android:padding="@dimen/activity_padding"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/colors"
+      style="@style/HomeButtons"
+      android:layout_marginEnd="@dimen/activity_half_padding"
+      android:onClick="callList"
+      android:text="@string/button_product_list"
+      />
+
+    <Button
+      android:id="@+id/family"
+      style="@style/HomeButtons"
+      android:layout_marginStart="@dimen/activity_half_padding"
+      android:onClick="callOrder"
+      android:text="@string/button_order_t_shirt"
+      />
+  </LinearLayout>
 </LinearLayout>
