@@ -10,10 +10,10 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
   public static final int TAB2 = 1;
   public static final int TAB3 = 2;
   public static final int TAB4 = 3;
-  public static final String UI_TAB_1 = R.string.tab_1_title;
-  public static final String UI_TAB_2 = R.string.tab_2_title;
-  public static final String UI_TAB_3 = R.string.tab_3_title;
-  public static final String UI_TAB_4 = R.string.tab_4_title;
+  public static final String UI_TAB_1 = "Tab 1";
+  public static final String UI_TAB_2 = "Tab 2";
+  public static final String UI_TAB_3 = "Tab 3";
+  public static final String UI_TAB_4 = "Tab 4";
   int mNumOfTabs;
 
   public MyPageAdapter(FragmentManager fm, int NumOfTabs) {

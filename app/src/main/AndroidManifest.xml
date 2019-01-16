@@ -32,24 +32,12 @@
         android:resource="@xml/provider_paths"/>
     </provider>
 
-    <activity
-      android:label="Product List"
-      android:name="com.sda.mcmullm2.assignment4.ProductActivity"
-      android:parentActivityName="com.sda.mcmullm2.assignment4.MainActivity">
-    </activity>
-    <activity android:name="com.sda.mcmullm2.assignment4.MainActivity">
+    <activity android:name="com.sda.mcmullm2.assignment4.MainTabbedActivity"
+      android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
-
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-    </activity>
-    <activity
-      android:label="Order T-Shirt"
-      android:name="com.sda.mcmullm2.assignment4.OrderActivity"
-      android:parentActivityName="com.sda.mcmullm2.assignment4.MainActivity">
-    </activity>
-    <activity android:name="com.sda.mcmullm2.assignment4.MainTabbedActivity">
     </activity>
   </application>
 
