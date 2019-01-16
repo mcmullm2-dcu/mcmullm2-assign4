@@ -22,7 +22,7 @@ public class MainTabbedActivity extends AppCompatActivity {
     tabLayout.addTab(tabLayout.newTab());
     tabLayout.addTab(tabLayout.newTab());
 
-    // Create the adapter that will return a fragment for each of the three
+    // Create the adapter that will return a fragment for each of the
     // primary sections of the activity.
     final ViewPager mypager = (ViewPager) findViewById(R.id.pager);
     final MyPageAdapter myadapter = new MyPageAdapter(getSupportFragmentManager(),

@@ -1,5 +1,6 @@
 package com.sda.mcmullm2.assignment4;
 
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -10,10 +11,10 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
   public static final int TAB2 = 1;
   public static final int TAB3 = 2;
   public static final int TAB4 = 3;
-  public static final String UI_TAB_1 = "Tab 1";
-  public static final String UI_TAB_2 = "Tab 2";
-  public static final String UI_TAB_3 = "Tab 3";
-  public static final String UI_TAB_4 = "Tab 4";
+  public static final String UI_TAB_1 = "Home";
+  public static final String UI_TAB_2 = "Products";
+  public static final String UI_TAB_3 = "Orders";
+  public static final String UI_TAB_4 = "Collection";
   int mNumOfTabs;
 
   public MyPageAdapter(FragmentManager fm, int NumOfTabs) {
@@ -23,7 +24,6 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
 
   @Override
   public Fragment getItem(int position) {
-
     switch (position) {
       case TAB1:
         return new Tab1Fragment();
@@ -58,6 +58,4 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
     }
     return null;
   }
-
-
 }

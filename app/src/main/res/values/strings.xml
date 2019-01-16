@@ -58,10 +58,10 @@
   <string name="error_photo_blank">You must include a photo.</string>
 
   <!-- Tab names -->
-  <string name="tab_1_title">Tab 1</string>
-  <string name="tab_2_title">Tab 2</string>
-  <string name="tab_3_title">Tab 3</string>
-  <string name="tab_4_title">Tab 4</string>
+  <string name="tab_1_title">Home</string>
+  <string name="tab_2_title">Products</string>
+  <string name="tab_3_title">Orders</string>
+  <string name="tab_4_title">Collection</string>
 
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
