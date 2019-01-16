@@ -11,16 +11,12 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
   public static final int TAB2 = 1;
   public static final int TAB3 = 2;
   public static final int TAB4 = 3;
-  public static final String UI_TAB_1 = "Home";
-  public static final String UI_TAB_2 = "Products";
-  public static final String UI_TAB_3 = "Orders";
-  public static final String UI_TAB_4 = "Collection";
   int mNumOfTabs;
   String[] tabTitles;
 
-  public MyPageAdapter(FragmentManager fm, int NumOfTabs, String[] titles) {
+  public MyPageAdapter(FragmentManager fm, String[] titles) {
     super(fm);
-    this.mNumOfTabs = NumOfTabs;
+    this.mNumOfTabs = titles.length;
     tabTitles = titles;
   }
 
