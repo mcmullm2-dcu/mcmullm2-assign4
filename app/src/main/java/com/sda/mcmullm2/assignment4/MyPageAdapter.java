@@ -1,6 +1,5 @@
 package com.sda.mcmullm2.assignment4;
 
-import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -24,7 +23,7 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
   public Fragment getItem(int position) {
     switch (position) {
       case TAB1:
-        return new Tab1Fragment();
+        return new FragmentHome();
       case TAB2:
         return new Tab2Fragment();
       case TAB3:
