@@ -16,17 +16,24 @@ public class MainTabbedActivity extends AppCompatActivity {
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-    TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+    // Set up tabs
+    TabLayout tabLayout = findViewById(R.id.tab_layout);
     tabLayout.addTab(tabLayout.newTab());
     tabLayout.addTab(tabLayout.newTab());
     tabLayout.addTab(tabLayout.newTab());
     tabLayout.addTab(tabLayout.newTab());
+    String[] tabTitles = {
+        getString(R.string.tab_1_title),
+        getString(R.string.tab_2_title),
+        getString(R.string.tab_3_title),
+        getString(R.string.tab_4_title)
+    };
 
     // Create the adapter that will return a fragment for each of the
     // primary sections of the activity.
-    final ViewPager mypager = (ViewPager) findViewById(R.id.pager);
+    final ViewPager mypager = findViewById(R.id.pager);
     final MyPageAdapter myadapter = new MyPageAdapter(getSupportFragmentManager(),
-        tabLayout.getTabCount());
+        tabLayout.getTabCount(), tabTitles);
 
     mypager.setAdapter(myadapter);
 

@@ -16,10 +16,12 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
   public static final String UI_TAB_3 = "Orders";
   public static final String UI_TAB_4 = "Collection";
   int mNumOfTabs;
+  String[] tabTitles;
 
-  public MyPageAdapter(FragmentManager fm, int NumOfTabs) {
+  public MyPageAdapter(FragmentManager fm, int NumOfTabs, String[] titles) {
     super(fm);
     this.mNumOfTabs = NumOfTabs;
+    tabTitles = titles;
   }
 
   @Override
@@ -44,18 +46,10 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
   }
 
   public CharSequence getPageTitle(int position) {
-    switch (position) {
-      case TAB1:
-        return UI_TAB_1;
-      case TAB2:
-        return UI_TAB_2;
-      case TAB3:
-        return UI_TAB_3;
-      case TAB4:
-        return UI_TAB_4;
-      default:
-        break;
+    if (tabTitles != null && position <= tabTitles.length) {
+      return tabTitles[position];
+    } else {
+      return null;
     }
-    return null;
   }
 }
