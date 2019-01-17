@@ -27,18 +27,16 @@
     android:orientation="horizontal">
 
     <Button
-      android:id="@+id/colors"
+      android:id="@+id/product_button"
       style="@style/HomeButtons"
       android:layout_marginEnd="@dimen/activity_half_padding"
-      android:onClick="callList"
       android:text="@string/button_product_list"
       />
 
     <Button
-      android:id="@+id/family"
+      android:id="@+id/order_button"
       style="@style/HomeButtons"
       android:layout_marginStart="@dimen/activity_half_padding"
-      android:onClick="callOrder"
       android:text="@string/button_order_t_shirt"
       />
   </LinearLayout>
