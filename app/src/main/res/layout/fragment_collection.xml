@@ -2,7 +2,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.sda.mcmullm2.assignment4.Tab4Fragment">
+  tools:context="com.sda.mcmullm2.assignment4.FragmentCollection">
 
   <!-- TODO: Update blank fragment layout -->
   <TextView

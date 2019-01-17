@@ -29,7 +29,7 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
       case TAB3:
         return new FragmentOrders();
       case TAB4:
-        return new Tab4Fragment();
+        return new FragmentCollection();
       default:
         return null;
     }
