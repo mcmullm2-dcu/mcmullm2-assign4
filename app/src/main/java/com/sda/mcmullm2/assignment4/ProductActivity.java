@@ -58,7 +58,7 @@ public class ProductActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_product_list);
+    //setContentView(R.layout.activity_product_list);
 
     // Create an ArrayList of Product objects
     final ArrayList<Product> products = new ArrayList<>();

@@ -25,7 +25,7 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
       case TAB1:
         return new FragmentHome();
       case TAB2:
-        return new Tab2Fragment();
+        return new FragmentProducts();
       case TAB3:
         return new Tab3Fragment();
       case TAB4:
