@@ -122,7 +122,7 @@ public class OrderActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_order);
+    //setContentView(R.layout.activity_order);
 
     // Get a reference to the address EditText view. The original version also set some IME options,
     // but this prevented the 'newline' button from appearing on the keyboard, which I felt
