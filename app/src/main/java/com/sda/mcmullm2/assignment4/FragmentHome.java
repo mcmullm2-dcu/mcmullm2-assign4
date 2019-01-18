@@ -16,8 +16,6 @@ public class FragmentHome extends Fragment implements OnClickListener {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    // super.onCreateView(inflater, container, savedInstanceState);
-
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -34,7 +32,7 @@ public class FragmentHome extends Fragment implements OnClickListener {
    * Click event handler for the home page buttons to navigate to other tabs.
    *
    * <a href="https://stackoverflow.com/a/14571018/5233918">Click events in fragments</a>
-   * <a href="https://stackoverflow.com/a/50072628/5233918">Programmatically changing TABS</a>
+   * <a href="https://stackoverflow.com/a/50072628/5233918">Programmatically changing tabs</a>
    *
    * @param view The View that was clicked to trigger this method (a button in this case)
    */
