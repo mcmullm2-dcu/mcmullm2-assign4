@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -86,6 +87,32 @@ public class FragmentOrders extends Fragment {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_orders, container, false);
+
+    // Get a reference to the address EditText view. The original version also set some IME options,
+    // but this prevented the 'newline' button from appearing on the keyboard, which I felt
+    // defeated the purpose of having a multiline text box, at least in the context of an address.
+    // This version requires users to dismiss the keyboard by clicking on another field, or using
+    // the phone's back button. Online opinions suggest this is standard, familiar practice,
+    // although I suspect it might be troublesome for some users. Having both 'Return' and 'Done'
+    // buttons would be better I think, but I couldn't figure out how to do that yet.
+    editDelivery = view.findViewById(R.id.editOptional);
+
+    // Get a reference to the remaining Views in the layout file.
+    spinner = view.findViewById(R.id.spinner);
+    customerName = view.findViewById(R.id.editCustomer);
+    imgThumbnail = view.findViewById(R.id.imageView);
+    imgCaption = view.findViewById(R.id.imageText);
+    editDelivery = view.findViewById(R.id.editOptional);
+
+    // Create an ArrayAdapter using the resource string array and a default spinner layout
+    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+        R.array.ui_time_entries, R.layout.spinner_days);
+    spinner.setAdapter(adapter);
+
+    // Restore image data if necessary
+    if (savedInstanceState != null) {
+      initPhoto(savedInstanceState.getString("imagePath"));
+    }
 
     return view;
   }
