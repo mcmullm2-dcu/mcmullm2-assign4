@@ -7,14 +7,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -28,7 +31,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class FragmentOrders extends Fragment {
+public class FragmentOrders extends Fragment implements OnClickListener {
   private static final int REQUEST_TAKE_PHOTO = 2;
 
   /**
@@ -73,6 +76,11 @@ public class FragmentOrders extends Fragment {
   private TextView imgCaption;
 
   /**
+   * The button used to submit a user's order.
+   */
+  private Button sendEmailButton;
+
+  /**
    * This method initialises class-level references to various View objects that need to be
    * accessed in other methods. It also populates the {@link Spinner} AdapterView with values from a
    * String array stored in strings.xml.
@@ -103,6 +111,12 @@ public class FragmentOrders extends Fragment {
     imgThumbnail = view.findViewById(R.id.imageView);
     imgCaption = view.findViewById(R.id.imageText);
     editDelivery = view.findViewById(R.id.editOptional);
+    sendEmailButton = view.findViewById(R.id.button);
+
+    // Set click events
+    imgThumbnail.setOnClickListener(this);
+    imgCaption.setOnClickListener(this);
+    sendEmailButton.setOnClickListener(this);
 
     // Create an ArrayAdapter using the resource string array and a default spinner layout
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -115,6 +129,26 @@ public class FragmentOrders extends Fragment {
     }
 
     return view;
+  }
+
+  /**
+   * Click event handler for the various views on this page.
+   *
+   * <a href="https://stackoverflow.com/a/14571018/5233918">Click events in fragments</a>
+    *
+   * @param view The View that was clicked to trigger this method
+   */
+  @Override
+  public void onClick(View view) {
+    switch (view.getId()) {
+      case R.id.imageView:
+      case R.id.imageText:
+        dispatchTakePictureIntent(view);
+        break;
+      case R.id.button:
+        sendEmail(view);
+        break;
+    }
   }
 
   /**

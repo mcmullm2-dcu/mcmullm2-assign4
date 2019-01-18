@@ -29,7 +29,6 @@ with views overlapping when moving between portrait and landscape.
       android:layout_below="@+id/editCustomer"
       android:contentDescription="@string/accessibility_order_photo"
       android:elevation="@dimen/activity_half_padding"
-      android:onClick="dispatchTakePictureIntent"
       android:scaleType="centerCrop"
       app:srcCompat="@drawable/camera"/>
 
@@ -41,7 +40,6 @@ with views overlapping when moving between portrait and landscape.
       android:layout_alignBottom="@+id/imageView"
       android:layout_centerHorizontal="true"
       android:elevation="@dimen/activity_half_padding"
-      android:onClick="dispatchTakePictureIntent"
       android:text="@string/photo_instruction"
       android:textColor="@color/light_accent"
       android:textSize="20sp"
@@ -98,7 +96,6 @@ with views overlapping when moving between portrait and landscape.
       android:layout_below="@id/collect_wrapper"
       android:padding="@dimen/activity_padding"
       android:background="@color/primary_color"
-      android:onClick="sendEmail"
       android:text="@string/button_place_order"
       android:textColor="@color/light_accent"/>
   </RelativeLayout>
