@@ -1,13 +1,6 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/listview_stores"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.sda.mcmullm2.assignment4.FragmentCollection">
-
-  <!-- TODO: Update blank fragment layout -->
-  <TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="@string/hello_blank_fragment"/>
-
-</FrameLayout>
+  android:padding="@dimen/activity_padding"
+  android:horizontalSpacing="@dimen/activity_padding"/>
