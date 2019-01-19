@@ -1,10 +1,12 @@
 package com.sda.mcmullm2.assignment4;
 
+import android.content.SharedPreferences;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.TabLayout;
+import android.view.Menu;
 
 public class MainTabbedActivity extends AppCompatActivity {
   private final int HOME_TAB_INDEX = 0;
@@ -34,5 +36,12 @@ public class MainTabbedActivity extends AppCompatActivity {
     mypager.setAdapter(myadapter);
 
     tabLayout.setupWithViewPager(mypager);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.main_menu, menu);
+    return true;
   }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context="com.sda.mcmullm2.assignment4.MainTabbedActivity">
+
+  <item
+    android:id="@+id/menuitem_send"
+    android:icon="@android:drawable/ic_dialog_email"
+    android:title="@string/button_place_order"
+    app:showAsAction="always">
+  </item>
+</menu>
