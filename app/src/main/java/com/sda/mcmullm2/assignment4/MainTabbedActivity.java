@@ -7,14 +7,19 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.TabLayout;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainTabbedActivity extends AppCompatActivity {
   private final int HOME_TAB_INDEX = 0;
+  SharedPreferences prefs;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main_tabbed);
+
+    prefs = getPreferences(MODE_PRIVATE);
 
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -31,7 +36,7 @@ public class MainTabbedActivity extends AppCompatActivity {
     // Create the adapter that will return a fragment for each of the
     // primary sections of the activity.
     final ViewPager mypager = findViewById(R.id.pager);
-    final MyPageAdapter myadapter = new MyPageAdapter(getSupportFragmentManager(), tabTitles);
+    final MyPageAdapter myadapter = new MyPageAdapter(getSupportFragmentManager(), tabTitles, prefs);
 
     mypager.setAdapter(myadapter);
 
@@ -43,5 +48,16 @@ public class MainTabbedActivity extends AppCompatActivity {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.main_menu, menu);
     return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menuitem_send:
+        Toast.makeText(this, getString(R.string.button_place_order),
+            Toast.LENGTH_SHORT).show();
+        return true;
+    }
+    return false;
   }
 }

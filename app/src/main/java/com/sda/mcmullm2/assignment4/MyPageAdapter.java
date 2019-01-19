@@ -1,5 +1,6 @@
 package com.sda.mcmullm2.assignment4;
 
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -12,11 +13,13 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
   public static final int TAB4 = 3;
   int mNumOfTabs;
   String[] tabTitles;
+  SharedPreferences prefs;
 
-  public MyPageAdapter(FragmentManager fm, String[] titles) {
+  public MyPageAdapter(FragmentManager fm, String[] titles, SharedPreferences prefs) {
     super(fm);
     this.mNumOfTabs = titles.length;
     tabTitles = titles;
+    this.prefs = prefs;
   }
 
   @Override
