@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.TabLayout;
 
 public class MainTabbedActivity extends AppCompatActivity {
+  private final int HOME_TAB_INDEX = 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,8 @@ public class MainTabbedActivity extends AppCompatActivity {
     for(int i=0; i<tabTitles.length; i++) {
       tabLayout.addTab(tabLayout.newTab());
     }
+    // Ensure 'Home' tab is presented to the user
+    tabLayout.getTabAt(HOME_TAB_INDEX).select();
 
     // Create the adapter that will return a fragment for each of the
     // primary sections of the activity.
