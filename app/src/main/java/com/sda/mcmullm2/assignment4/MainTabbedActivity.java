@@ -54,7 +54,8 @@ public class MainTabbedActivity extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menuitem_send:
-        Toast.makeText(this, getString(R.string.button_place_order),
+        EmailSummary summary = new EmailSummary(this.getApplicationContext(), prefs);
+        Toast.makeText(this, summary.toString(), // getString(R.string.button_place_order),
             Toast.LENGTH_SHORT).show();
         return true;
     }
