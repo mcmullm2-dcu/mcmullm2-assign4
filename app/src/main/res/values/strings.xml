@@ -33,6 +33,7 @@
   <string name="order_message_collect_from">Collection location</string>
   <string name="order_message_deliver">Please deliver to:</string>
   <string name="order_message_deliver_time">Please deliver it in</string>
+  <string name="order_message_phone">Phone</string>
   <string name="order_message_days">days</string>
   <string name="order_message_day">day</string>
   <string name="order_message_end">Regards</string>

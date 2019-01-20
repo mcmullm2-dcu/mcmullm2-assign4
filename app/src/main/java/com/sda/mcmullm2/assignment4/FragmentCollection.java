@@ -1,5 +1,6 @@
 package com.sda.mcmullm2.assignment4;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,6 +15,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class FragmentCollection extends Fragment {
+  private SharedPreferences prefs;
+
+  public void setPreferences(SharedPreferences prefs) {
+    this.prefs = prefs;
+  }
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
@@ -42,6 +49,11 @@ public class FragmentCollection extends Fragment {
       public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
         Store selectedItem = stores.get(i);
         String toastMsg = selectedItem.getArea();
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("IsCollection", true);
+        editor.putString("Address", formatAddress(selectedItem));
+        editor.commit();
+
         Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_SHORT).show();
       }
     });
@@ -49,4 +61,12 @@ public class FragmentCollection extends Fragment {
     return view;
   }
 
+  public String formatAddress(Store store) {
+    StringBuilder sb = new StringBuilder();
+    sb.append(store.getArea()).append(": ");
+    sb.append(store.getAddress()).append(".\n");
+    sb.append(getString(R.string.order_message_phone)).append(": ");
+    sb.append(store.getPhone());
+    return sb.toString();
+  }
 }

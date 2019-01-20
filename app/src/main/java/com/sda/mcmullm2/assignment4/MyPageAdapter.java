@@ -32,7 +32,9 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
       case TAB3:
         return new FragmentOrders();
       case TAB4:
-        return new FragmentCollection();
+        FragmentCollection fc = new FragmentCollection();
+        fc.setPreferences(prefs);
+        return fc;
       default:
         return null;
     }

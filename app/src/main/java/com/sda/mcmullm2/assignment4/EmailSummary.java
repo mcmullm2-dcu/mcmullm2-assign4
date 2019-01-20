@@ -84,7 +84,7 @@ public class EmailSummary {
       // For collection
       message.append(context.getString(R.string.order_message_collect)).append(" ");
       message.append(deliveryTime).append(" ");
-      message.append(daysText);
+      message.append(daysText).append("\n");
       message.append(context.getString(R.string.order_message_collect_from)).append(":\n");
       message.append(orderAddress);
     } else {
