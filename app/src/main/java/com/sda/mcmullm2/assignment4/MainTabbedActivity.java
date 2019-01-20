@@ -12,7 +12,12 @@ import android.widget.Toast;
 
 public class MainTabbedActivity extends AppCompatActivity {
   private final int HOME_TAB_INDEX = 0;
+  String[] tabTitles;
   SharedPreferences prefs;
+  private String customerName;
+  private String address;
+  private int deliveryTime;
+  private boolean isCollection;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +31,7 @@ public class MainTabbedActivity extends AppCompatActivity {
 
     // Set up tabs
     TabLayout tabLayout = findViewById(R.id.tab_layout);
-    String[] tabTitles = getResources().getStringArray(R.array.tab_titles);
+    tabTitles = getResources().getStringArray(R.array.tab_titles);
     for(int i=0; i<tabTitles.length; i++) {
       tabLayout.addTab(tabLayout.newTab());
     }
@@ -54,11 +59,25 @@ public class MainTabbedActivity extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menuitem_send:
+        setPreferences();
         EmailSummary summary = new EmailSummary(this.getApplicationContext(), prefs);
         Toast.makeText(this, summary.toString(), // getString(R.string.button_place_order),
             Toast.LENGTH_SHORT).show();
         return true;
     }
     return false;
+  }
+
+  private void setPreferences() {
+    if (tabTitles == null && tabTitles.length < 4) return;
+
+    // https://learnpainless.com/android/how-to-get-fragment-from-viewpager-android
+    FragmentOrders ordersFragment = (FragmentOrders) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + 2);
+
+    if (prefs != null) {
+      SharedPreferences.Editor editor = prefs.edit();
+      editor.putString("CustomerName", ordersFragment.getTest());
+      editor.commit();
+    }
   }
 }

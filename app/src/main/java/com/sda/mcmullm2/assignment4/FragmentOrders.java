@@ -40,7 +40,7 @@ public class FragmentOrders extends Fragment implements OnClickListener {
   private static final String TAG = "Assign3";
   private Uri photoUri;
   private String photoPath;
-
+  public String getTest() { return "YoYo Brennan"; }
   /**
    * A reference to the {@link Spinner} AdapterView used for selecting days in the layout XML file.
    */
