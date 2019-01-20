@@ -8,6 +8,7 @@ public class EmailSummary {
   private String customerName;
   private String address;
   private int deliveryTime;
+  private boolean isCollection;
 
   public EmailSummary(Context context, SharedPreferences prefs) {
     this.context = context;
@@ -15,6 +16,7 @@ public class EmailSummary {
       setCustomerName(prefs.getString("CustomerName", "customer"));
       setAddress(prefs.getString("Address", "address"));
       setDeliveryTime(prefs.getInt("DeliveryTime", 0));
+      setIsCollection(prefs.getBoolean("IsCollection", false));
     }
   }
 
@@ -42,6 +44,14 @@ public class EmailSummary {
     this.deliveryTime = deliveryTime;
   }
 
+  public boolean getIsCollection() {
+    return isCollection;
+  }
+
+  public void setIsCollection(boolean collection) {
+    this.isCollection = collection;
+  }
+
 
   /**
    * Creates a summary of the order details, ready to use in the email message body.
@@ -66,19 +76,21 @@ public class EmailSummary {
     message.append("\n");
 
     // Delivery instructions
-    String delivery = fixAddress(address);
+    String orderAddress = fixAddress(address);
     String daysText = context.getString(deliveryTime == 1
         ? R.string.order_message_day : R.string.order_message_days);
 
-    if (delivery.matches("")) {
+    if (isCollection) {
       // For collection
       message.append(context.getString(R.string.order_message_collect)).append(" ");
       message.append(deliveryTime).append(" ");
       message.append(daysText);
+      message.append(context.getString(R.string.order_message_collect_from)).append(":\n");
+      message.append(orderAddress);
     } else {
       // For delivery
       message.append(context.getString(R.string.order_message_deliver)).append("\n");
-      message.append(delivery).append("\n\n");
+      message.append(orderAddress).append("\n\n");
       message.append(context.getString(R.string.order_message_deliver_time)).append(" ");
       message.append(deliveryTime).append(" ");
       message.append(daysText);

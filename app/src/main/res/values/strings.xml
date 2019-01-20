@@ -30,6 +30,7 @@
   <string name="ready_time">Delivery/Collection in (days)</string>
   <string name="order_message_1">Please find my order attached</string>
   <string name="order_message_collect">I will collect it in</string>
+  <string name="order_message_collect_from">Collection location</string>
   <string name="order_message_deliver">Please deliver to:</string>
   <string name="order_message_deliver_time">Please deliver it in</string>
   <string name="order_message_days">days</string>
