@@ -58,7 +58,8 @@
   <string name="validation_confirmation_button">OK</string>
   <string name="error_customer_name_blank">You did not enter your name.</string>
   <string name="error_photo_blank">You must include a photo.</string>
-  <string name="error_no_prefs">Please complete your order before sending</string>
+  <string name="error_no_prefs">Error reading order details</string>
+  <string name="error_no_order">Please complete an order before sending</string>
 
   <!-- Tab names -->
   <string-array name="tab_titles">

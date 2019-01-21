@@ -16,7 +16,13 @@ public class MainTabbedActivity extends AppCompatActivity {
   private final String TAG = "Assign4";
 
   private final int HOME_TAB_INDEX = 0;
+  private final int PRODUCTS_TAB_INDEX = 1;
+  private final int ORDER_TAB_INDEX = 2;
+  private final int COLLECTION_TAB_INDEX = 3;
+
   String[] tabTitles;
+  TabLayout tabLayout;
+
   SharedPreferences prefs;
   private FragmentProducts productsFragment;
   private FragmentOrders ordersFragment;
@@ -33,13 +39,13 @@ public class MainTabbedActivity extends AppCompatActivity {
     setSupportActionBar(toolbar);
 
     // Set up tabs
-    TabLayout tabLayout = findViewById(R.id.tab_layout);
+    tabLayout = findViewById(R.id.tab_layout);
     tabTitles = getResources().getStringArray(R.array.tab_titles);
     for(int i=0; i<tabTitles.length; i++) {
       tabLayout.addTab(tabLayout.newTab());
     }
     // Ensure 'Home' tab is presented to the user
-    tabLayout.getTabAt(HOME_TAB_INDEX).select();
+    setTab(HOME_TAB_INDEX);
 
     // Create the adapter that will return a fragment for each of the
     // primary sections of the activity.
@@ -104,12 +110,33 @@ public class MainTabbedActivity extends AppCompatActivity {
       Toast.makeText(this, getString(R.string.error_no_prefs), Toast.LENGTH_SHORT).show();
       return false;
     }
-    if (productsFragment == null) return false;
-    if (ordersFragment == null) return false;
+    if (isValidOrder()) {
+      SharedPreferences.Editor editor = prefs.edit();
+      editor.putString("CustomerName", ordersFragment.getCustomerName());
+      editor.commit();
+      return true;
+    }
+    return false;
+  }
 
-    SharedPreferences.Editor editor = prefs.edit();
-    editor.putString("CustomerName", ordersFragment.getTest());
-    editor.commit();
+  private boolean isValidOrder() {
+    if (ordersFragment == null) {
+      setTab(ORDER_TAB_INDEX);
+      Toast.makeText(this, getString(R.string.error_no_order), Toast.LENGTH_SHORT).show();
+      return false;
+    } else {
+      if (ordersFragment.getCustomerName().isEmpty()) {
+        setTab(ORDER_TAB_INDEX);
+        Toast.makeText(this, getString(R.string.error_customer_name_blank), Toast.LENGTH_SHORT).show();
+        return false;
+      }
+    }
     return true;
+  }
+
+  private void setTab(int index) {
+    if (tabLayout != null && tabLayout.getTabCount() > index) {
+      tabLayout.getTabAt(index).select();
+    }
   }
 }

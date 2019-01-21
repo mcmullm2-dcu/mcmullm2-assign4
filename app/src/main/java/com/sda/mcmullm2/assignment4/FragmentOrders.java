@@ -32,15 +32,27 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FragmentOrders extends Fragment implements OnClickListener {
+
+  /**
+   * Get the name entered by the customer.
+   *
+   * @return
+   */
+  public String getCustomerName() {
+    if (customerName != null) {
+      return customerName.getText().toString().trim();
+    }
+    return "";
+  }
+
   private static final int REQUEST_TAKE_PHOTO = 2;
 
   /**
    * An identifying tag used for filtering log messages, if required.
    */
-  private static final String TAG = "Assign3";
+  private static final String TAG = "Assign4";
   private Uri photoUri;
   private String photoPath;
-  public String getTest() { return "YoYo Brennan"; }
   /**
    * A reference to the {@link Spinner} AdapterView used for selecting days in the layout XML file.
    */
