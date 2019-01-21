@@ -29,7 +29,7 @@ public class EmailSummary {
   }
 
   public String getAddress() {
-    return customerName;
+    return address;
   }
 
   public void setAddress(String address) {

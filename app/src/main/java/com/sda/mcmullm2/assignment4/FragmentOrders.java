@@ -45,6 +45,31 @@ public class FragmentOrders extends Fragment implements OnClickListener {
     return "";
   }
 
+  /**
+   * Get the delivery address entered by the customer, which is optional if they pick a collection
+   * point instead.
+   *
+   * @return
+   */
+  public String getCustomerAddress() {
+    if (editDelivery != null) {
+      return fixAddress(editDelivery.getText().toString());
+    }
+    return "";
+  }
+
+  /**
+   * Get the delivery/collection time (in days) requested by the customer.
+   *
+   * @return
+   */
+  public int getDeliveryTime() {
+    if (spinner != null) {
+      return Integer.parseInt(((CharSequence) spinner.getSelectedItem()).toString().trim());
+    }
+    return 0;
+  }
+
   private static final int REQUEST_TAKE_PHOTO = 2;
 
   /**
