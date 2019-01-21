@@ -16,6 +16,27 @@ import java.util.ArrayList;
 
 public class FragmentCollection extends Fragment {
   private SharedPreferences prefs;
+  private Store selected = null;
+  private boolean isCollected = false;
+
+  /**
+   * Determines if the order is to be collected.
+   */
+  public boolean isForCollection() {
+    return isCollected;
+  }
+
+  /**
+   * Get the collection address, if any.
+   *
+   * @return
+   */
+  public String getAddress() {
+    if (selected != null) {
+      return formatAddress(selected);
+    }
+    return "";
+  }
 
   public void setPreferences(SharedPreferences prefs) {
     this.prefs = prefs;
@@ -47,14 +68,17 @@ public class FragmentCollection extends Fragment {
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
-        Store selectedItem = stores.get(i);
-        String toastMsg = selectedItem.getArea();
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("IsCollection", true);
-        editor.putString("Address", formatAddress(selectedItem));
-        editor.commit();
-
-        Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_SHORT).show();
+        Store clickedStore = stores.get(i);
+        if (selected != clickedStore) {
+          selected = stores.get(i);
+          isCollected = true;
+          String toastMsg = selected.getArea();
+          Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_SHORT).show();
+        } else {
+          selected = null;
+          isCollected = false;
+        }
+        // TODO: Visual indication of selected item.
       }
     });
 

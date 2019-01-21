@@ -113,8 +113,17 @@ public class MainTabbedActivity extends AppCompatActivity {
     if (isValidOrder()) {
       SharedPreferences.Editor editor = prefs.edit();
       editor.putString("CustomerName", ordersFragment.getCustomerName());
-      // TODO: determine between delivery and collection
-      editor.putString("Address", ordersFragment.getCustomerAddress());
+
+      // Determine between delivery and collection
+      if (collectionFragment != null && collectionFragment.isForCollection()) {
+        // for collection
+        editor.putBoolean("IsCollection", true);
+        editor.putString("Address", collectionFragment.getAddress());
+      } else {
+        // for delivery
+        editor.putBoolean("IsCollection", false);
+        editor.putString("Address", ordersFragment.getCustomerAddress());
+      }
       editor.putInt("DeliveryTime", ordersFragment.getDeliveryTime());
       editor.commit();
       return true;
