@@ -65,7 +65,10 @@ public class FragmentProducts extends Fragment {
       @Override
       public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
         Product selectedItem = products.get(i);
-        String toastMsg = selectedItem.getProductName();
+        selectedItem.toggleSelection();
+
+        String toastMsg = selectedItem.getProductName() + " ";
+        toastMsg += selectedItem.isSelected() ? "Added" : "Removed";
         Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_SHORT).show();
 
         // Animate the selected item.

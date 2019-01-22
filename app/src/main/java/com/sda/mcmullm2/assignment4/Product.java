@@ -49,6 +49,11 @@ public class Product {
   private final int productResourceId;
 
   /**
+   * Indicates that this product has been selected by a user.
+   */
+  private boolean selected = false;
+
+  /**
    * Creates a new {@link Product} object with a given name, price and resource ID (image).
    *
    * @param name The name of the product (e.g. Polo T-Shirt)
@@ -82,5 +87,18 @@ public class Product {
     return productResourceId;
   }
 
+  /**
+   * Toggles between whether this product is selected or not.
+   */
+  public void toggleSelection() {
+    selected = !selected;
+  }
 
+  /**
+   * Indicates whether or not this product has been selected.
+   *
+   */
+  public boolean isSelected() {
+    return selected;
+  }
 }
