@@ -2,6 +2,7 @@ package com.sda.mcmullm2.assignment4;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
@@ -81,6 +83,13 @@ public class FragmentProducts extends Fragment {
                 .setDuration(animationDuration * 4).translationY(0);
           }
         });
+
+        // Change the background colour to indicate selection
+        ImageView image = view.findViewById(R.id.list_item_icon);
+        if (image != null) {
+          int bgColour = selectedItem.isSelected() ? ContextCompat.getColor(view.getContext(), R.color.product_item_background_selected) : ContextCompat.getColor(view.getContext(), R.color.product_item_background);
+          image.setBackgroundColor(bgColour);
+        }
       }
     });
 
