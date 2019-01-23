@@ -55,7 +55,7 @@ public class FragmentProducts extends Fragment {
 
     // Create an {@link ProductAdapter}, whose data source is a list of {@link Product}s. The
     // adapter knows how to create views for each item in the list.
-    ProductAdapter flavorAdapter = new ProductAdapter(getActivity(), products);
+    final ProductAdapter flavorAdapter = new ProductAdapter(getActivity(), products);
 
 
     // Get a reference to the GridView, and attach the adapter to the GridView.
@@ -84,7 +84,13 @@ public class FragmentProducts extends Fragment {
           }
         });
 
-        // Change the background colour to indicate selection
+        // Change the background colour to indicate selection.
+        // Alternatively, we could use flavorAdapter.notifyDataSetChanged();, as the code below is
+        // essentially a copy of what's found in the adapter. However, this also prevents the
+        // animation from working, and appears to be less responsive to user clicks. From the docs:
+        // https://developer.android.com/reference/android/support/v7/widget/RecyclerView.Adapter#notifyDataSetChanged()
+        // "...it will always be more efficient to use the more specific change events if you can.
+        // Rely on notifyDataSetChanged() as a last resort."
         ImageView image = view.findViewById(R.id.list_item_icon);
         if (image != null) {
           int bgColour = selectedItem.isSelected() ? ContextCompat.getColor(view.getContext(), R.color.product_item_background_selected) : ContextCompat.getColor(view.getContext(), R.color.product_item_background);

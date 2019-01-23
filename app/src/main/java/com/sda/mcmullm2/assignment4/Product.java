@@ -32,7 +32,6 @@ package com.sda.mcmullm2.assignment4;
  * @author Michael McMullin
  */
 public class Product {
-
   /**
    * Name of the product (e.g. Polo T-Shirt, etc).
    */

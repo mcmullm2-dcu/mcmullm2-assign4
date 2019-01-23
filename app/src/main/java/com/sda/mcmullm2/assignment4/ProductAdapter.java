@@ -26,6 +26,7 @@
 package com.sda.mcmullm2.assignment4;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,6 +99,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
     // Get the image resource ID from the current Product object and set the image to iconView.
     iconView.setImageResource(currentProduct.getImageResourceId());
+    int bgColour = currentProduct.isSelected() ? ContextCompat.getColor(getContext(), R.color.product_item_background_selected) : ContextCompat.getColor(getContext(), R.color.product_item_background);
+    iconView.setBackgroundColor(bgColour);
 
     // Return the whole list item layout (containing 2 TextViews and an ImageView) so that it can be
     // shown in the GridView

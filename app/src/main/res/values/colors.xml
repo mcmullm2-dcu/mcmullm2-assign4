@@ -16,5 +16,5 @@
 
   <!-- Background color for product images -->
   <color name="product_item_background">#DDDDDD</color>
-  <color name="product_item_background_selected">#DDFFDD</color>
+  <color name="product_item_background_selected">#99DD99</color>
 </resources>
