@@ -114,6 +114,11 @@ public class MainTabbedActivity extends AppCompatActivity {
       SharedPreferences.Editor editor = prefs.edit();
       editor.putString("CustomerName", ordersFragment.getCustomerName());
 
+      // Add products
+      if (productsFragment.getSelectedProducts() != null) {
+        editor.putStringSet("Products", productsFragment.getSelectedProducts());
+      }
+
       // Determine between delivery and collection
       if (collectionFragment != null && collectionFragment.isForCollection()) {
         // for collection
@@ -143,6 +148,7 @@ public class MainTabbedActivity extends AppCompatActivity {
         return false;
       }
     }
+    // TODO: validate selected products
     return true;
   }
 

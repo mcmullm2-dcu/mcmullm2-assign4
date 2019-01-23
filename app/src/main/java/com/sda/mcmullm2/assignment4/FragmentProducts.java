@@ -13,8 +13,15 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FragmentProducts extends Fragment {
+  private Set<String> selectedProducts;
+
+  public Set<String> getSelectedProducts() {
+    return selectedProducts;
+  }
 
   /**
    * This method creates an {@link ArrayList} of {@link Product} objects (some repeated for
@@ -52,6 +59,9 @@ public class FragmentProducts extends Fragment {
     products.add(new Product("Sports", 60.00, R.drawable.ic_product_sports));
     products.add(new Product("Hoodies", 70.00, R.drawable.ic_product_hoodie));
 
+    // Maintain a HashSet for selected products. Note that in this demo, I've duplicated a few
+    // products for illustration, so as we're using a Set, only one of each will be stored.
+    selectedProducts = new HashSet<String>();
 
     // Create an {@link ProductAdapter}, whose data source is a list of {@link Product}s. The
     // adapter knows how to create views for each item in the list.
@@ -68,6 +78,11 @@ public class FragmentProducts extends Fragment {
       public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
         Product selectedItem = products.get(i);
         selectedItem.toggleSelection();
+        if (selectedItem.isSelected()) {
+          selectedProducts.add(selectedItem.getProductName());
+        } else {
+          selectedProducts.remove(selectedItem.getProductName());
+        }
 
         String toastMsg = selectedItem.getProductName() + " ";
         toastMsg += selectedItem.isSelected() ? "Added" : "Removed";

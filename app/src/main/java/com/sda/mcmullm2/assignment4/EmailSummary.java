@@ -2,6 +2,8 @@ package com.sda.mcmullm2.assignment4;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EmailSummary {
   private Context context;
@@ -9,6 +11,7 @@ public class EmailSummary {
   private String address;
   private int deliveryTime;
   private boolean isCollection;
+  private HashSet<String> selectedProducts;
 
   public EmailSummary(Context context, SharedPreferences prefs) {
     this.context = context;
@@ -17,6 +20,7 @@ public class EmailSummary {
       setAddress(prefs.getString("Address", "address"));
       setDeliveryTime(prefs.getInt("DeliveryTime", 0));
       setIsCollection(prefs.getBoolean("IsCollection", false));
+      setSelectedProducts(prefs.getStringSet("Products", null));
     }
   }
 
@@ -52,6 +56,9 @@ public class EmailSummary {
     this.isCollection = collection;
   }
 
+  public HashSet<String> getSelectedProducts() { return selectedProducts; }
+
+  public void setSelectedProducts(Set<String> products) { this.selectedProducts = (HashSet<String>)products; }
 
   /**
    * Creates a summary of the order details, ready to use in the email message body.
@@ -74,6 +81,14 @@ public class EmailSummary {
     // Introduction paragraph
     message.append(context.getString(R.string.order_message_1));
     message.append("\n");
+
+    // Products
+    if (getSelectedProducts() != null) {
+      for (String product : selectedProducts) {
+        message.append(product);
+        message.append("\n");
+      }
+    }
 
     // Delivery instructions
     String orderAddress = fixAddress(address);
