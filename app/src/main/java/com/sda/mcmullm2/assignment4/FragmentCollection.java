@@ -3,6 +3,7 @@ package com.sda.mcmullm2.assignment4;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +59,10 @@ public class FragmentCollection extends Fragment {
 
     // Create a {@link StoreAdapter}, whose data source is a list of {@link Store}s. The
     // adapter knows how to create views for each item in the list.
-    StoreAdapter adapter = new StoreAdapter(getActivity(), stores);
+    final StoreAdapter adapter = new StoreAdapter(getActivity(), stores);
 
     // Get a reference to the ListView, and attach the adapter to the ListView.
-    ListView listView = view.findViewById(R.id.listview_stores);
+    final ListView listView = view.findViewById(R.id.listview_stores);
     listView.setAdapter(adapter);
 
     // Add event listener to each item.
@@ -72,13 +73,17 @@ public class FragmentCollection extends Fragment {
         if (selected != clickedStore) {
           selected = stores.get(i);
           isCollected = true;
+          view.setSelected(true);
           String toastMsg = String.format(getString(R.string.collection_selected), selected.getArea());
           Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_SHORT).show();
         } else {
+          view.setSelected(false);
+          listView.setItemChecked(-1, true);
+          adapter.notifyDataSetChanged();
           selected = null;
           isCollected = false;
+          Toast.makeText(getActivity(), "Off", Toast.LENGTH_SHORT).show();
         }
-        // TODO: Visual indication of selected item.
       }
     });
 
