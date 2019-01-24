@@ -85,7 +85,7 @@ public class FragmentProducts extends Fragment {
         }
 
         String toastMsg = selectedItem.getProductName() + " ";
-        toastMsg += selectedItem.isSelected() ? "Added" : "Removed";
+        toastMsg += selectedItem.isSelected() ? getString(R.string.product_added) : getString(R.string.product_removed);
         Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_SHORT).show();
 
         // Animate the selected item.

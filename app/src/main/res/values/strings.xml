@@ -44,6 +44,11 @@
   <string name="button_order_t_shirt">Order T-Shirt</string>
   <string name="button_place_order">Send Order</string>
 
+  <!-- Product/Collection Feedback -->
+  <string name="product_added">Added</string>
+  <string name="product_removed">Removed</string>
+  <string name="collection_selected">%s selected for collection</string>
+
   <!-- Photo feedback -->
   <string name="photo_instruction">Take photo for T-Shirt</string>
   <string name="photo_success">Photo Taken successfully</string>

@@ -72,7 +72,7 @@ public class FragmentCollection extends Fragment {
         if (selected != clickedStore) {
           selected = stores.get(i);
           isCollected = true;
-          String toastMsg = selected.getArea();
+          String toastMsg = String.format(getString(R.string.collection_selected), selected.getArea());
           Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_SHORT).show();
         } else {
           selected = null;
