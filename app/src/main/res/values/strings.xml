@@ -29,6 +29,7 @@
   <string name="delivery_instruction">Delivery Address -or- For Collection</string>
   <string name="ready_time">Delivery/Collection in (days)</string>
   <string name="order_message_1">Please find my order attached</string>
+  <string name="order_product_list">Products Ordered:</string>
   <string name="order_message_collect">I will collect it in</string>
   <string name="order_message_collect_from">Collection location</string>
   <string name="order_message_deliver">Please deliver to:</string>
@@ -68,8 +69,4 @@
     <item>Orders</item>
     <item>Collection</item>
   </string-array>
-
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>

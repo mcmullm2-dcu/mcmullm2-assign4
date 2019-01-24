@@ -80,15 +80,18 @@ public class EmailSummary {
 
     // Introduction paragraph
     message.append(context.getString(R.string.order_message_1));
-    message.append("\n");
+    message.append("\n\n");
 
     // Products
+    message.append(context.getString(R.string.order_product_list));
+    message.append("\n");
     if (getSelectedProducts() != null) {
       for (String product : selectedProducts) {
         message.append(product);
         message.append("\n");
       }
     }
+    message.append("\n");
 
     // Delivery instructions
     String orderAddress = fixAddress(address);
