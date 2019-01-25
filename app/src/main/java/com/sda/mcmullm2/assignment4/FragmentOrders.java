@@ -70,6 +70,15 @@ public class FragmentOrders extends Fragment implements OnClickListener {
     return 0;
   }
 
+  /**
+   * Get the URI of the photo taken, if any.
+   *
+   * @return
+   */
+  public Uri getPhotoUri() {
+    return photoUri;
+  }
+
   private static final int REQUEST_TAKE_PHOTO = 2;
 
   /**

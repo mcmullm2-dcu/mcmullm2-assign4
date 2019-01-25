@@ -81,7 +81,13 @@ public class MainTabbedActivity extends AppCompatActivity {
           intent.setType("*/*");
           intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.to_email)});
           intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
-          // intent.putExtra(Intent.EXTRA_STREAM, photoUri); // URI of photo to send as attachment.
+
+          // Attach photo (if present) to email
+          if (ordersFragment != null && ordersFragment.getPhotoUri() != null) {
+            intent.putExtra(Intent.EXTRA_STREAM, ordersFragment.getPhotoUri());
+          }
+
+          // Add email body text
           intent.putExtra(Intent.EXTRA_TEXT, summary.toString());
           if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
