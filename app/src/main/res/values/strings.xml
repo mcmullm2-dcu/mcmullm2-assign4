@@ -48,6 +48,7 @@
   <string name="product_added">Added</string>
   <string name="product_removed">Removed</string>
   <string name="collection_selected">%s selected for collection</string>
+  <string name="collection_off">No collection selected</string>
 
   <!-- Photo feedback -->
   <string name="photo_instruction">Take photo for T-Shirt</string>

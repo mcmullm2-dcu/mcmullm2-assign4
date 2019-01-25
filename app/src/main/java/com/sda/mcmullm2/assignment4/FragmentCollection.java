@@ -71,6 +71,7 @@ public class FragmentCollection extends Fragment {
       public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
         Store clickedStore = stores.get(i);
         if (selected != clickedStore) {
+          listView.setSelector(R.color.product_item_background_selected);
           selected = stores.get(i);
           isCollected = true;
           view.setSelected(true);
@@ -78,11 +79,10 @@ public class FragmentCollection extends Fragment {
           Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_SHORT).show();
         } else {
           view.setSelected(false);
-          listView.setItemChecked(-1, true);
-          adapter.notifyDataSetChanged();
+          listView.setSelector(android.R.color.transparent);
           selected = null;
           isCollected = false;
-          Toast.makeText(getActivity(), "Off", Toast.LENGTH_SHORT).show();
+          Toast.makeText(getActivity(), getString(R.string.collection_off), Toast.LENGTH_SHORT).show();
         }
       }
     });
