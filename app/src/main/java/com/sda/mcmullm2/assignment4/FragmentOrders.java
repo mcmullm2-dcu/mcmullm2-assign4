@@ -122,6 +122,12 @@ public class FragmentOrders extends Fragment implements OnClickListener {
   private TextView imgCaption;
 
   /**
+   * Flag indicating that a photo has been taken. Useful for situations where a user tries, then
+   * cancels, taking a replacement photo.
+   */
+  private boolean photoTaken = false;
+
+  /**
    * This method initialises class-level references to various View objects that need to be
    * accessed in other methods. It also populates the {@link Spinner} AdapterView with values from a
    * String array stored in strings.xml.
@@ -308,73 +314,29 @@ public class FragmentOrders extends Fragment implements OnClickListener {
     super.onActivityResult(requestCode, resultCode, data);
 
     // Make sure we're handling the correct request, and that it returned OK from the camera app.
-    if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
-      // Show the thumbnail on ImageView
-      initPhoto(photoPath);
+    if (requestCode == REQUEST_TAKE_PHOTO) {
+      if (resultCode == Activity.RESULT_OK) {
+        // Show the thumbnail on ImageView
+        initPhoto(photoPath);
 
-      // Let user know that image saved correctly using a Toast message. I removed the dialog as it
-      // seemed too intrusive.
-      CharSequence text = getString(R.string.photo_success);
-      int duration = Toast.LENGTH_SHORT;
-      Log.i(TAG, photoUri.toString());
+        // Let user know that image saved correctly using a Toast message. I removed the dialog as it
+        // seemed too intrusive.
+        CharSequence text = getString(R.string.photo_success);
+        int duration = Toast.LENGTH_SHORT;
+        Log.i(TAG, photoUri.toString());
+        photoTaken = true;
 
-      Toast toast = Toast.makeText(getActivity(), text, duration);
-      toast.show();
-    } else {
-      Toast t = Toast.makeText(getActivity(), "Error taking photo", Toast.LENGTH_SHORT);
-      t.show();
+        Toast toast = Toast.makeText(getActivity(), text, duration);
+        toast.show();
+      } else {
+        if (!photoTaken) {
+          imageFile = null;
+          photoUri = null;
+        }
+        Toast t = Toast.makeText(getActivity(), "Error taking photo", Toast.LENGTH_SHORT);
+        t.show();
+      }
     }
-  }
-
-  /**
-   * Creates a summary of the order details, ready to use in the email message body.
-   *
-   * <p>Email body message is created using user-input form data.
-   *
-   * @return Email Body Message
-   */
-  private String createOrderSummary() {
-    // Original code replaced with StringBuilder
-    StringBuilder message = new StringBuilder();
-
-    // Add customer's name
-    message.append(getString(R.string.customer_name));
-    message.append(": ");
-    message.append(customerName.getText().toString());
-    message.append("\n\n");
-
-    // Introduction paragraph
-    message.append(getString(R.string.order_message_1));
-    message.append("\n");
-
-    // Delivery instructions
-    String delivery = fixAddress(editDelivery.getText().toString());
-    int deliveryTime = Integer.parseInt(
-        ((CharSequence) spinner.getSelectedItem()).toString().trim());
-    String daysText = getString(deliveryTime == 1
-        ? R.string.order_message_day : R.string.order_message_days);
-
-    if (delivery.matches("")) {
-      // For collection
-      message.append(getString(R.string.order_message_collect)).append(" ");
-      message.append(deliveryTime).append(" ");
-      message.append(daysText);
-    } else {
-      // For delivery
-      message.append(getString(R.string.order_message_deliver)).append("\n");
-      message.append(delivery).append("\n\n");
-      message.append(getString(R.string.order_message_deliver_time)).append(" ");
-      message.append(deliveryTime).append(" ");
-      message.append(daysText);
-    }
-
-    // Sign off message
-    message.append("\n\n");
-    message.append(getString(R.string.order_message_end));
-    message.append("\n");
-    message.append(customerName.getText().toString());
-
-    return message.toString();
   }
 
   /**
