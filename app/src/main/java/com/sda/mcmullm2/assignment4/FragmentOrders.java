@@ -122,11 +122,6 @@ public class FragmentOrders extends Fragment implements OnClickListener {
   private TextView imgCaption;
 
   /**
-   * The button used to submit a user's order.
-   */
-  private Button sendEmailButton;
-
-  /**
    * This method initialises class-level references to various View objects that need to be
    * accessed in other methods. It also populates the {@link Spinner} AdapterView with values from a
    * String array stored in strings.xml.
@@ -157,12 +152,10 @@ public class FragmentOrders extends Fragment implements OnClickListener {
     imgThumbnail = view.findViewById(R.id.imageView);
     imgCaption = view.findViewById(R.id.imageText);
     editDelivery = view.findViewById(R.id.editOptional);
-    sendEmailButton = view.findViewById(R.id.button);
 
     // Set click events
     imgThumbnail.setOnClickListener(this);
     imgCaption.setOnClickListener(this);
-    sendEmailButton.setOnClickListener(this);
 
     // Create an ArrayAdapter using the resource string array and a default spinner layout
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -190,9 +183,6 @@ public class FragmentOrders extends Fragment implements OnClickListener {
       case R.id.imageView:
       case R.id.imageText:
         dispatchTakePictureIntent(view);
-        break;
-      case R.id.button:
-        sendEmail(view);
         break;
     }
   }
@@ -413,55 +403,6 @@ public class FragmentOrders extends Fragment implements OnClickListener {
   }
 
   /**
-   * Validates order form and launch populated email app.
-   *
-   * @param v The View that was clicked to trigger this method (the 'Send Order' button in this
-   *     case)
-   */
-  public void sendEmail(View v) {
-    Log.i(TAG, "Starting sendEmail method");
-
-    // Update the customer name to remove surrounding spacing.
-    String customerName = this.customerName.getText().toString().trim();
-    this.customerName.setText(customerName);
-
-    // The original version only checked the customer name wasn't blank. I've changed this to also
-    // check that a photo has been taken. As the logic is a little more involved, it's been moved to
-    // its own method.
-    if (!isValidForm()) {
-      Log.i(TAG, "Starting isValidForm block");
-      // Decided the original Toast message wasn't prominent enough, using dialog instead.
-      // Display dialog with error message. Uses the getValidationError() method to construct a
-      // custom error message.
-      AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-      builder.setTitle(R.string.validation_dialog_title).setMessage(getValidationError())
-          .setPositiveButton(R.string.validation_confirmation_button, null).show();
-    } else {
-      // At this point, the form contains valid data, so prepare an Intent object to send the form
-      // data to an email app's appropriate Activity.
-      Intent intent = new Intent(Intent.ACTION_SEND);
-      intent.setType("*/*");
-      intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.to_email)});
-      intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
-      intent.putExtra(Intent.EXTRA_STREAM, photoUri); // URI of photo to send as attachment.
-      intent.putExtra(Intent.EXTRA_TEXT, createOrderSummary());
-      if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-        startActivity(intent);
-      }
-    }
-  }
-
-  /**
-   * Determines whether or not the form contains valid data.
-   *
-   * @return {@code true} if the form contains valid input. Otherwise, {@code false}.
-   */
-  private boolean isValidForm() {
-    return !this.customerName.getText().toString().matches("")
-        && isPhotoTaken();
-  }
-
-  /**
    * Determines whether or not the user has taken a photo.
    *
    * @return {@code true} if the user has taken a photo. Otherwise, {@code false}
@@ -470,26 +411,4 @@ public class FragmentOrders extends Fragment implements OnClickListener {
     return imageFile != null;
   }
 
-  /**
-   * Constructs an error message to instruct users what to change.
-   *
-   * @return An error message based on incorrect user inputs.
-   */
-  private String getValidationError() {
-    StringBuilder error = new StringBuilder();
-
-    // Handle empty customer name.
-    if (this.customerName.getText().toString().matches("")) {
-      error.append(getString(R.string.error_customer_name_blank));
-      error.append("\n");
-    }
-
-    // Handle empty image data.
-    if (!isPhotoTaken()) {
-      error.append(getString(R.string.error_photo_blank));
-      error.append("\n");
-    }
-
-    return error.toString();
-  }
 }

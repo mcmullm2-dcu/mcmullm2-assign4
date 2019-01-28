@@ -2,6 +2,7 @@ package com.sda.mcmullm2.assignment4;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -83,8 +84,11 @@ public class MainTabbedActivity extends AppCompatActivity {
           intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
 
           // Attach photo (if present) to email
-          if (ordersFragment != null && ordersFragment.getPhotoUri() != null) {
-            intent.putExtra(Intent.EXTRA_STREAM, ordersFragment.getPhotoUri());
+          Uri photo = (ordersFragment == null) ? null : ordersFragment.getPhotoUri();
+          if (photo != null) {
+            Log.i(TAG, "Photo URI");
+            Log.i(TAG, photo.toString());
+            intent.putExtra(Intent.EXTRA_STREAM, photo);
           }
 
           // Add email body text

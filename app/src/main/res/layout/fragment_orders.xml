@@ -86,17 +86,5 @@ with views overlapping when moving between portrait and landscape.
         android:gravity="end"
         />
     </LinearLayout>
-
-    <Button
-      android:id="@+id/button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/activity_padding"
-      android:layout_alignParentRight="true"
-      android:layout_below="@id/collect_wrapper"
-      android:padding="@dimen/activity_padding"
-      android:background="@color/primary_color"
-      android:text="@string/button_place_order"
-      android:textColor="@color/light_accent"/>
   </RelativeLayout>
 </ScrollView>
