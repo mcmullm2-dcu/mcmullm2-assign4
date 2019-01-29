@@ -2,6 +2,7 @@ package com.sda.mcmullm2.assignment4;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.design.widget.TabLayout.Tab;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,14 @@ import android.widget.Button;
 public class FragmentHome extends Fragment implements OnClickListener {
   private final int TAB_PRODUCTS_INDEX = 1;
   private final int TAB_ORDER_INDEX = 2;
+  private TabLayout tabLayout = null;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_home, container, false);
+    tabLayout = getActivity().findViewById(R.id.tab_layout);
 
     // Assign click event listeners to the home page buttons.
     Button productButton = view.findViewById(R.id.product_button);
@@ -38,15 +41,20 @@ public class FragmentHome extends Fragment implements OnClickListener {
    */
   @Override
   public void onClick(View view) {
-    TabLayout tabs = getActivity().findViewById(R.id.tab_layout);
-    if (tabs != null && tabs.getTabCount() > 0) {
+    if (tabLayout != null && tabLayout.getTabCount() > TAB_ORDER_INDEX) {
+      Tab selectedTab = null;
+
       switch (view.getId()) {
         case R.id.product_button:
-          tabs.getTabAt(TAB_PRODUCTS_INDEX).select();
+          selectedTab = tabLayout.getTabAt(TAB_PRODUCTS_INDEX);
           break;
         case R.id.order_button:
-          tabs.getTabAt(TAB_ORDER_INDEX).select();
+          selectedTab = tabLayout.getTabAt(TAB_ORDER_INDEX);
           break;
+      }
+
+      if (selectedTab != null) {
+        selectedTab.select();
       }
     }
   }
