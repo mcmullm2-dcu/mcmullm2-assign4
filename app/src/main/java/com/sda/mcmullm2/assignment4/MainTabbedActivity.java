@@ -186,7 +186,18 @@ public class MainTabbedActivity extends AppCompatActivity {
       return false;
     }
 
-    // TODO: validate delivery / collection
+    // Validate delivery / collection
+    // Assumption: Point 12 in the assignment summary suggests that collection is given priority, so
+    // if a user picks a collection point AND enters an address, assume collection.
+    if (collectionFragment != null && collectionFragment.isForCollection()) {
+      return true;
+    }
+    if (ordersFragment.getCustomerAddress() == "") {
+      setTab(COLLECTION_TAB_INDEX);
+      Toast.makeText(this, getString(R.string.error_no_address), Toast.LENGTH_LONG).show();
+      return false;
+    }
+
     return true;
   }
 

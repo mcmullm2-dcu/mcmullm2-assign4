@@ -26,7 +26,7 @@
   </string-array>
   <string name="customer_name">Name</string>
   <string name="customer_name_hint">Enter Your Name</string>
-  <string name="delivery_instruction">Delivery Address -or- For Collection</string>
+  <string name="delivery_instruction">Delivery Address (if not collecting)</string>
   <string name="ready_time">Delivery/Collection in (days)</string>
   <string name="order_message_1">Please find my order attached</string>
   <string name="order_product_list">Products Ordered:</string>
@@ -68,6 +68,7 @@
   <string name="error_no_prefs">Error reading order details</string>
   <string name="error_no_order">Please complete an order before sending</string>
   <string name="error_no_products">Please select at least one product</string>
+  <string name="error_no_address">Please pick a collection point here, or add a delivery address in the Orders tab</string>
 
   <!-- Tab names -->
   <string-array name="tab_titles">
