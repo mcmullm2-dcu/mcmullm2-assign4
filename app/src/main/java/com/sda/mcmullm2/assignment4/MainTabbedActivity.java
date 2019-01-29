@@ -159,6 +159,11 @@ public class MainTabbedActivity extends AppCompatActivity {
     return false;
   }
 
+  /**
+   * Checks if the order is valid.
+   *
+   * @return
+   */
   private boolean isValidOrder() {
     if (ordersFragment == null) {
       setTab(ORDER_TAB_INDEX);
@@ -171,7 +176,17 @@ public class MainTabbedActivity extends AppCompatActivity {
         return false;
       }
     }
-    // TODO: validate selected products
+
+    // Validate selected products (ensure at least one product is selected)
+    if (productsFragment == null ||
+        productsFragment.getSelectedProducts() == null ||
+        productsFragment.getSelectedProducts().size() == 0) {
+      setTab(PRODUCTS_TAB_INDEX);
+      Toast.makeText(this, getString(R.string.error_no_products), Toast.LENGTH_SHORT).show();
+      return false;
+    }
+
+    // TODO: validate delivery / collection
     return true;
   }
 

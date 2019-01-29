@@ -67,6 +67,7 @@
   <string name="error_photo_blank">You must include a photo.</string>
   <string name="error_no_prefs">Error reading order details</string>
   <string name="error_no_order">Please complete an order before sending</string>
+  <string name="error_no_products">Please select at least one product</string>
 
   <!-- Tab names -->
   <string-array name="tab_titles">
