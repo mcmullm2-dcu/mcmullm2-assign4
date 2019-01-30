@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class FragmentHome extends Fragment implements OnClickListener {
+public class FragmentHome extends Fragment {
   private final int TAB_PRODUCTS_INDEX = 1;
   private final int TAB_ORDER_INDEX = 2;
   private TabLayout tabLayout = null;
@@ -25,8 +25,18 @@ public class FragmentHome extends Fragment implements OnClickListener {
     // Assign click event listeners to the home page buttons.
     Button productButton = view.findViewById(R.id.product_button);
     Button orderButton = view.findViewById(R.id.order_button);
-    productButton.setOnClickListener(this);
-    orderButton.setOnClickListener(this);
+    productButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        tabLayout.getTabAt(TAB_PRODUCTS_INDEX).select();
+      }
+    });
+    orderButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        tabLayout.getTabAt(TAB_ORDER_INDEX).select();
+      }
+    });
 
     return view;
   }
@@ -39,7 +49,6 @@ public class FragmentHome extends Fragment implements OnClickListener {
    *
    * @param view The View that was clicked to trigger this method (a button in this case)
    */
-  @Override
   public void onClick(View view) {
     if (tabLayout != null && tabLayout.getTabCount() > TAB_ORDER_INDEX) {
       Tab selectedTab = null;

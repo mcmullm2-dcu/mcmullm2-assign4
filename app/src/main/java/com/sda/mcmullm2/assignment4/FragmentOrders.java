@@ -170,7 +170,11 @@ public class FragmentOrders extends Fragment implements OnClickListener {
 
     // Restore image data if necessary
     if (savedInstanceState != null) {
-      initPhoto(savedInstanceState.getString("imagePath"));
+      try {
+        initPhoto(savedInstanceState.getString("imagePath"));
+      } catch (NullPointerException e){
+        Log.e(TAG, "Cannot find imagePath");
+      }
     }
 
     return view;
