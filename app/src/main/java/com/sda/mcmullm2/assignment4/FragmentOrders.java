@@ -173,7 +173,7 @@ public class FragmentOrders extends Fragment implements OnClickListener {
       try {
         initPhoto(savedInstanceState.getString("imagePath"));
       } catch (NullPointerException e){
-        Log.e(TAG, "Cannot find imagePath");
+        Log.w(TAG, "Cannot find imagePath");
       }
     }
 

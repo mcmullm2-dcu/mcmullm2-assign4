@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class FragmentCollection extends Fragment {
+  private static final String TAG = "Assign4";
   private SharedPreferences prefs;
   private Store selected = null;
   private boolean isCollected = false;
+  final ArrayList<Store> stores = new ArrayList<>();
+  private ListView lv = null;
 
   /**
    * Determines if the order is to be collected.
@@ -50,7 +54,6 @@ public class FragmentCollection extends Fragment {
     View view = inflater.inflate(R.layout.fragment_collection, container, false);
 
     // Create an ArrayList of stores available for collection
-    final ArrayList<Store> stores = new ArrayList<Store>();
     stores.add(new Store("Swords", "1 Main Street, Swords, Co. Dublin", "01 234 5678"));
     stores.add(new Store("Galway", "5 Eyre Square, Galway", "091 234 5678"));
     stores.add(new Store("Cork", "54 Patrick's Street, Cork", "021 456 9543"));
@@ -63,6 +66,7 @@ public class FragmentCollection extends Fragment {
 
     // Get a reference to the ListView, and attach the adapter to the ListView.
     final ListView listView = view.findViewById(R.id.listview_stores);
+    lv = listView;
     listView.setAdapter(adapter);
 
     // Add event listener to each item.
@@ -84,13 +88,57 @@ public class FragmentCollection extends Fragment {
           isCollected = false;
           Toast.makeText(getActivity(), getString(R.string.collection_off), Toast.LENGTH_SHORT).show();
         }
+        if (prefs != null) {
+          SharedPreferences.Editor editor = prefs.edit();
+          editor.putBoolean("IsCollection", isCollected);
+          if (selected != null) editor.putString("CollectionArea", selected.getArea());
+          editor.putString("Address", getAddress());
+          editor.commit();
+        }
       }
     });
+
+    // Restore state
+    if (savedInstanceState != null) {
+      isCollected = (savedInstanceState.containsKey("isCollected")) ? savedInstanceState.getBoolean("isCollected") : false;
+      String area = (savedInstanceState.containsKey("area")) ? savedInstanceState.getString("area") : "";
+      if (selected == null && area != "") {
+        for (Store store : stores) {
+          if (store.getArea() == area) {
+            selected = store;
+            break;
+          }
+        }
+      }
+      if (isCollected) {
+        try {
+          int selectedIndex = savedInstanceState.getInt("storeIndex");
+          listView.setSelector(R.color.product_item_background_selected);
+          listView.setSelection(selectedIndex);
+          view.setSelected(true);
+        } catch (NullPointerException e) {
+          Log.w(TAG, "Store index not found");
+        }
+      }
+
+    }
 
     return view;
   }
 
-  public String formatAddress(Store store) {
+  @Override
+  public void onSaveInstanceState(Bundle state) {
+    super.onSaveInstanceState(state);
+    if (lv != null) {
+      state.putInt("storeIndex", lv.getSelectedItemPosition());
+    }
+    if (selected != null) {
+      state.putString("area", selected.getArea());
+    }
+    state.putBoolean("isCollected", isCollected);
+  }
+
+    public String formatAddress(Store store) {
     StringBuilder sb = new StringBuilder();
     sb.append(store.getArea()).append(": ");
     sb.append(store.getAddress()).append(".\n");
