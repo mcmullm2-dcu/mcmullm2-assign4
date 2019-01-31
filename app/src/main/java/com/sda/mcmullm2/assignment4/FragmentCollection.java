@@ -18,11 +18,34 @@ import java.util.ArrayList;
 
 public class FragmentCollection extends Fragment {
   private static final String TAG = "Assign4";
-  private SharedPreferences prefs;
+  private static SharedPreferences prefs;
   private Store selected = null;
   private boolean isCollected = false;
   final ArrayList<Store> stores = new ArrayList<>();
   private ListView lv = null;
+  private int selectedIndex = -1;
+
+  /**
+   * Default empty constructor
+   */
+  public FragmentCollection() {
+  }
+
+  /**
+   * Factory method to create a new instance of FragmentCollection
+   * @param preferences
+   * @return
+   */
+  public static FragmentCollection newInstance(SharedPreferences preferences) {
+    FragmentCollection fragment = new FragmentCollection();
+    prefs = preferences;
+    /*
+    Bundle args = new Bundle();
+    args.putString(ARG_PARAM1, param1);
+    args.putString(ARG_PARAM2, param2);
+    fragment.setArguments(args); */
+    return fragment;
+  }
 
   /**
    * Determines if the order is to be collected.
@@ -41,10 +64,6 @@ public class FragmentCollection extends Fragment {
       return formatAddress(selected);
     }
     return "";
-  }
-
-  public void setPreferences(SharedPreferences prefs) {
-    this.prefs = prefs;
   }
 
   @Override
@@ -66,6 +85,7 @@ public class FragmentCollection extends Fragment {
 
     // Get a reference to the ListView, and attach the adapter to the ListView.
     final ListView listView = view.findViewById(R.id.listview_stores);
+    restorePreferences(listView);
     lv = listView;
     listView.setAdapter(adapter);
 
@@ -75,10 +95,10 @@ public class FragmentCollection extends Fragment {
       public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
         Store clickedStore = stores.get(i);
         if (selected != clickedStore) {
-          listView.setSelector(R.color.product_item_background_selected);
+          setSelected(listView, i);
           selected = stores.get(i);
+          selectedIndex = i;
           isCollected = true;
-          view.setSelected(true);
           String toastMsg = String.format(getString(R.string.collection_selected), selected.getArea());
           Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_SHORT).show();
         } else {
@@ -88,41 +108,9 @@ public class FragmentCollection extends Fragment {
           isCollected = false;
           Toast.makeText(getActivity(), getString(R.string.collection_off), Toast.LENGTH_SHORT).show();
         }
-        if (prefs != null) {
-          SharedPreferences.Editor editor = prefs.edit();
-          editor.putBoolean("IsCollection", isCollected);
-          if (selected != null) editor.putString("CollectionArea", selected.getArea());
-          editor.putString("Address", getAddress());
-          editor.commit();
-        }
+        savePreferences();
       }
     });
-
-    // Restore state
-    if (savedInstanceState != null) {
-      isCollected = (savedInstanceState.containsKey("isCollected")) ? savedInstanceState.getBoolean("isCollected") : false;
-      String area = (savedInstanceState.containsKey("area")) ? savedInstanceState.getString("area") : "";
-      if (selected == null && area != "") {
-        for (Store store : stores) {
-          if (store.getArea() == area) {
-            selected = store;
-            break;
-          }
-        }
-      }
-      if (isCollected) {
-        try {
-          int selectedIndex = savedInstanceState.getInt("storeIndex");
-          listView.setSelector(R.color.product_item_background_selected);
-          listView.setSelection(selectedIndex);
-          view.setSelected(true);
-        } catch (NullPointerException e) {
-          Log.w(TAG, "Store index not found");
-        }
-      }
-
-    }
-
     return view;
   }
 
@@ -145,5 +133,46 @@ public class FragmentCollection extends Fragment {
     sb.append(getString(R.string.order_message_phone)).append(": ");
     sb.append(store.getPhone());
     return sb.toString();
+  }
+
+  /**
+   * Saves the state of a selected item to Shared Preferences.
+   */
+  public void savePreferences() {
+    if (prefs != null) {
+      SharedPreferences.Editor editor = prefs.edit();
+      editor.putBoolean("IsCollection", isCollected);
+      if (selected != null) {
+        editor.putString("CollectionArea", selected.getArea());
+        editor.putString("Address", getAddress());
+        editor.putInt("CollectionIndex", selectedIndex);
+      }
+      editor.commit();
+    }
+  }
+
+  /**
+   * Restore data from Shared Preferences.
+   */
+  public void restorePreferences(ListView listView) {
+    if (prefs != null && stores != null) {
+      isCollected = prefs.getBoolean("IsCollection", false);
+      selectedIndex = prefs.getInt("CollectionIndex", -1);
+      String area = prefs.getString("CollectionArea", "");
+      if (area != "") {
+        for (Store s : stores) {
+          if (s.getArea() == area) {
+            selected = s;
+            setSelected(listView, selectedIndex);
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  public void setSelected(ListView listView, int index) {
+    listView.setSelector(R.color.product_item_background_selected);
+    listView.setSelection(index);
   }
 }

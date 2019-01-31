@@ -1,6 +1,7 @@
 package com.sda.mcmullm2.assignment4;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,13 @@ public class StoreAdapter extends ArrayAdapter<Store> {
 
     // Get the area from the current Store object and set this text on the address TextView.
     phoneTextView.setText(currentStore.getPhone());
+
+    // Set the background colour if selected
+    // int bgColour = listItemView.isSelected() ? ContextCompat.getColor(getContext(), R.color.product_item_background_selected) : ContextCompat.getColor(getContext(), R.color.product_item_background);
+    // listItemView.setBackgroundColor(bgColour);
+    int bgColour = ContextCompat.getColor(getContext(), R.color.product_item_background_selected);
+    if (listItemView.isSelected())
+      listItemView.setBackgroundColor(bgColour);
 
     // Return the whole list item layout (containing 3 TextViews) so that it can be shown in the ListView
     return listItemView;
