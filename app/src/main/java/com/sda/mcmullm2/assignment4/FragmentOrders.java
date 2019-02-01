@@ -232,10 +232,20 @@ public class FragmentOrders extends Fragment implements OnClickListener {
   @Override
   public void onSaveInstanceState(Bundle state) {
     super.onSaveInstanceState(state);
+    String fileName = "";
 
     if (isPhotoTaken()) {
-      String fileName = imageFile.getPath();
+      fileName = imageFile.getPath();
       state.putString("imagePath", fileName);
+    }
+
+    if (prefs != null) {
+      SharedPreferences.Editor editor = prefs.edit();
+      editor.putString("CustomerName", getCustomerName());
+      editor.putString("DeliveryAddress", getCustomerAddress());
+      editor.putString("ImagePath", fileName);
+      editor.putInt("DeliveryTime", getDeliveryTime());
+      editor.commit();
     }
   }
 
