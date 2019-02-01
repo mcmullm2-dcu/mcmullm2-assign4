@@ -2,6 +2,7 @@ package com.sda.mcmullm2.assignment4;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FragmentOrders extends Fragment implements OnClickListener {
+
+  private static SharedPreferences prefs;
+
+  /**
+   * Default empty constructor
+   */
+  public FragmentOrders() {
+  }
+
+  /**
+   * Factory method to create a new instance of FragmentOrders
+   * @param preferences
+   * @return
+   */
+  public static FragmentOrders newInstance(SharedPreferences preferences) {
+    FragmentOrders fragment = new FragmentOrders();
+    prefs = preferences;
+    return fragment;
+  }
 
   /**
    * Get the name entered by the customer.

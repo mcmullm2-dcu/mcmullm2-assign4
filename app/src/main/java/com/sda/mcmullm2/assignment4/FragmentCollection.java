@@ -39,11 +39,6 @@ public class FragmentCollection extends Fragment {
   public static FragmentCollection newInstance(SharedPreferences preferences) {
     FragmentCollection fragment = new FragmentCollection();
     prefs = preferences;
-    /*
-    Bundle args = new Bundle();
-    args.putString(ARG_PARAM1, param1);
-    args.putString(ARG_PARAM2, param2);
-    fragment.setArguments(args); */
     return fragment;
   }
 
@@ -144,7 +139,7 @@ public class FragmentCollection extends Fragment {
       editor.putBoolean("IsCollection", isCollected);
       if (selected != null) {
         editor.putString("CollectionArea", selected.getArea());
-        editor.putString("Address", getAddress());
+        editor.putString("CollectionAddress", getAddress());
         editor.putInt("CollectionIndex", selectedIndex);
       }
       editor.commit();

@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class MyPageAdapter extends FragmentStatePagerAdapter {
 
-  public static final int TAB1 = 0;
-  public static final int TAB2 = 1;
-  public static final int TAB3 = 2;
-  public static final int TAB4 = 3;
+  public static final int TAB_HOME = 0;
+  public static final int TAB_PRODUCTS = 1;
+  public static final int TAB_ORDER = 2;
+  public static final int TAB_COLLECTION = 3;
   int mNumOfTabs;
   String[] tabTitles;
   SharedPreferences prefs;
@@ -25,13 +25,13 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
   @Override
   public Fragment getItem(int position) {
     switch (position) {
-      case TAB1:
+      case TAB_HOME:
         return new FragmentHome();
-      case TAB2:
-        return new FragmentProducts();
-      case TAB3:
-        return new FragmentOrders();
-      case TAB4:
+      case TAB_PRODUCTS:
+        return FragmentProducts.newInstance(prefs);
+      case TAB_ORDER:
+        return FragmentOrders.newInstance(prefs);
+      case TAB_COLLECTION:
         return FragmentCollection.newInstance(prefs);
       default:
         return null;

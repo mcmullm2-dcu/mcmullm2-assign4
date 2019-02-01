@@ -94,8 +94,13 @@ public class Product {
   }
 
   /**
+   * Explicitly set the selection state of this product.
+   * @param selected The desired selection state for this product.
+   */
+  public void setSelection(Boolean selected) { this.selected = selected; }
+
+  /**
    * Indicates whether or not this product has been selected.
-   *
    */
   public boolean isSelected() {
     return selected;

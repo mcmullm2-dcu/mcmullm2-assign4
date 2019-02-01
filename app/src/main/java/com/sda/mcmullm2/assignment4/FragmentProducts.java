@@ -1,5 +1,6 @@
 package com.sda.mcmullm2.assignment4;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -17,10 +18,27 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FragmentProducts extends Fragment {
+  private static SharedPreferences prefs;
   private Set<String> selectedProducts;
-
   public Set<String> getSelectedProducts() {
     return selectedProducts;
+  }
+
+  /**
+   * Default empty constructor
+   */
+  public FragmentProducts() {
+  }
+
+  /**
+   * Factory method to create a new instance of FragmentProducts
+   * @param preferences
+   * @return
+   */
+  public static FragmentProducts newInstance(SharedPreferences preferences) {
+    FragmentProducts fragment = new FragmentProducts();
+    prefs = preferences;
+    return fragment;
   }
 
   /**
@@ -51,22 +69,31 @@ public class FragmentProducts extends Fragment {
     products.add(new Product("Sports", 60.00, R.drawable.ic_product_sports));
     products.add(new Product("Hoodies", 70.00, R.drawable.ic_product_hoodie));
     products.add(new Product("Baby Tees", 15.00, R.drawable.ic_product_baby));
-    products.add(new Product("Polo Shirt", 50.00, R.drawable.ic_product_polo));
-    products.add(new Product("Loose Fit", 20.00, R.drawable.ic_product_mens));
-    products.add(new Product("Ladies", 40.00, R.drawable.ic_product_ladies));
-    products.add(new Product("Long Sleeve", 60.00, R.drawable.ic_product_longsleeve));
-    products.add(new Product("V-Neck", 40.00, R.drawable.ic_product_vneck));
-    products.add(new Product("Sports", 60.00, R.drawable.ic_product_sports));
-    products.add(new Product("Hoodies", 70.00, R.drawable.ic_product_hoodie));
+    products.add(new Product("Polo Shirt 2", 50.00, R.drawable.ic_product_polo));
+    products.add(new Product("Loose Fit 2", 20.00, R.drawable.ic_product_mens));
+    products.add(new Product("Ladies 2", 40.00, R.drawable.ic_product_ladies));
+    products.add(new Product("Long Sleeve 2", 60.00, R.drawable.ic_product_longsleeve));
+    products.add(new Product("V-Neck 2", 40.00, R.drawable.ic_product_vneck));
+    products.add(new Product("Sports 2", 60.00, R.drawable.ic_product_sports));
+    products.add(new Product("Hoodies 2", 70.00, R.drawable.ic_product_hoodie));
 
-    // Maintain a HashSet for selected products. Note that in this demo, I've duplicated a few
-    // products for illustration, so as we're using a Set, only one of each will be stored.
-    selectedProducts = new HashSet<String>();
+    // Maintain a HashSet for selected products.
+    selectedProducts = prefs != null ? (HashSet<String>)prefs.getStringSet("Products", null) : new HashSet<String>();
+    if (prefs != null && (selectedProducts == null || selectedProducts.size() == 0)) {
+      SharedPreferences.Editor editor = prefs.edit();
+      editor.putStringSet("Products", selectedProducts);
+      editor.commit();
+    }
+
+    if (selectedProducts.size() > 0) {
+      for (Product p : products) {
+        p.setSelection(selectedProducts.contains(p.getProductName()));
+      }
+    }
 
     // Create an {@link ProductAdapter}, whose data source is a list of {@link Product}s. The
     // adapter knows how to create views for each item in the list.
     final ProductAdapter flavorAdapter = new ProductAdapter(getActivity(), products);
-
 
     // Get a reference to the GridView, and attach the adapter to the GridView.
     GridView listView = view.findViewById(R.id.listview_products);

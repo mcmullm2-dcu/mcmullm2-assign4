@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import java.util.Set;
 
 public class MainTabbedActivity extends AppCompatActivity {
   private final String TAG = "Assign4";
@@ -22,6 +23,8 @@ public class MainTabbedActivity extends AppCompatActivity {
   private final int ORDER_TAB_INDEX = 2;
   private final int COLLECTION_TAB_INDEX = 3;
 
+  private final int DEFAULT_DELIVERY_TIME = 3;
+
   String[] tabTitles;
   TabLayout tabLayout;
 
@@ -29,6 +32,12 @@ public class MainTabbedActivity extends AppCompatActivity {
   private FragmentProducts productsFragment;
   private FragmentOrders ordersFragment;
   private FragmentCollection collectionFragment;
+
+  private String prefs_customerName = "";
+  private Set<String> prefs_products = null;
+  private int prefs_deliveryTime = DEFAULT_DELIVERY_TIME;
+  private String prefs_address = "";
+  private Boolean prefs_isCollection = false;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -96,9 +105,6 @@ public class MainTabbedActivity extends AppCompatActivity {
           if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
           }
-
-          //Toast.makeText(this, summary.toString(), // getString(R.string.button_place_order),
-          //    Toast.LENGTH_SHORT).show();
           return true;
         }
     }
@@ -135,6 +141,8 @@ public class MainTabbedActivity extends AppCompatActivity {
     }
     if (isValidOrder()) {
       SharedPreferences.Editor editor = prefs.edit();
+      editor.putString("Address", prefs_address);
+      /*
       editor.putString("CustomerName", ordersFragment.getCustomerName());
 
       // Add products
@@ -153,6 +161,7 @@ public class MainTabbedActivity extends AppCompatActivity {
         editor.putString("Address", ordersFragment.getCustomerAddress());
       }
       editor.putInt("DeliveryTime", ordersFragment.getDeliveryTime());
+      */
       editor.commit();
       return true;
     }
@@ -165,40 +174,49 @@ public class MainTabbedActivity extends AppCompatActivity {
    * @return
    */
   private boolean isValidOrder() {
-    if (ordersFragment == null) {
-      setTab(ORDER_TAB_INDEX);
-      Toast.makeText(this, getString(R.string.error_no_order), Toast.LENGTH_SHORT).show();
+    if (prefs == null) {
+      Toast.makeText(this, getString(R.string.error_no_prefs), Toast.LENGTH_SHORT).show();
       return false;
-    } else {
-      if (ordersFragment.getCustomerName().isEmpty()) {
-        setTab(ORDER_TAB_INDEX);
-        Toast.makeText(this, getString(R.string.error_customer_name_blank), Toast.LENGTH_SHORT).show();
-        return false;
-      }
     }
 
-    // Validate selected products (ensure at least one product is selected)
-    if (productsFragment == null ||
-        productsFragment.getSelectedProducts() == null ||
-        productsFragment.getSelectedProducts().size() == 0) {
+    getPreferences();
+
+    // Check products selected
+    if (prefs_products == null || prefs_products.size() == 0) {
       setTab(PRODUCTS_TAB_INDEX);
       Toast.makeText(this, getString(R.string.error_no_products), Toast.LENGTH_SHORT).show();
       return false;
     }
 
-    // Validate delivery / collection
-    // Assumption: Point 12 in the assignment summary suggests that collection is given priority, so
-    // if a user picks a collection point AND enters an address, assume collection.
-    if (collectionFragment != null && collectionFragment.isForCollection()) {
-      return true;
+    // Check customer name
+    if (prefs_customerName.isEmpty()) {
+      setTab(ORDER_TAB_INDEX);
+      Toast.makeText(this, getString(R.string.error_customer_name_blank), Toast.LENGTH_SHORT).show();
+      return false;
     }
-    if (ordersFragment.getCustomerAddress() == "") {
+
+    // Check address
+    if (prefs_address.isEmpty()) {
       setTab(COLLECTION_TAB_INDEX);
       Toast.makeText(this, getString(R.string.error_no_address), Toast.LENGTH_LONG).show();
       return false;
     }
 
     return true;
+  }
+
+  private void getPreferences() {
+    if (prefs != null) {
+      prefs_isCollection = prefs.getBoolean("IsCollection", false);
+      if (prefs_isCollection) {
+        prefs_address = prefs.getString("CollectionAddress", "");
+      } else {
+        prefs_address = prefs.getString("DeliveryAddress", "");
+      }
+    }
+    prefs_customerName = prefs.getString("CustomerName", "");
+    prefs_products = prefs.getStringSet("Products", null);
+    prefs_deliveryTime = prefs.getInt("DeliveryTime", DEFAULT_DELIVERY_TIME);
   }
 
   private void setTab(int index) {
