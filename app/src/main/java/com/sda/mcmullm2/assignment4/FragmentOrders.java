@@ -12,6 +12,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,7 @@ import java.util.Date;
 public class FragmentOrders extends Fragment implements OnClickListener {
 
   private static SharedPreferences prefs;
+  private final int DEFAULT_DELIVERY_TIME = 3;
 
   /**
    * Default empty constructor
@@ -65,6 +68,12 @@ public class FragmentOrders extends Fragment implements OnClickListener {
     return "";
   }
 
+  public void setCustomerName(String name) {
+    if (customerName != null) {
+      customerName.setText(name);
+    }
+  }
+
   /**
    * Get the delivery address entered by the customer, which is optional if they pick a collection
    * point instead.
@@ -78,6 +87,12 @@ public class FragmentOrders extends Fragment implements OnClickListener {
     return "";
   }
 
+  public void setCustomerAddress(String address) {
+    if (editDelivery != null) {
+      editDelivery.setText(address);
+    }
+  }
+
   /**
    * Get the delivery/collection time (in days) requested by the customer.
    *
@@ -88,6 +103,19 @@ public class FragmentOrders extends Fragment implements OnClickListener {
       return Integer.parseInt(((CharSequence) spinner.getSelectedItem()).toString().trim());
     }
     return 0;
+  }
+
+  public void setDeliveryTime(int days) {
+    String dayStr = Integer.toString(days);
+    if (spinner != null) {
+      for (int i=0; i<spinner.getCount(); i++) {
+        String item = spinner.getItemAtPosition(i).toString().trim();
+        if (item.equals(dayStr)) {
+          spinner.setSelection(i);
+          break;
+        }
+      }
+    }
   }
 
   /**
@@ -196,6 +224,25 @@ public class FragmentOrders extends Fragment implements OnClickListener {
         Log.w(TAG, "Cannot find imagePath");
       }
     }
+    restoreFromSharedPrefs();
+
+    // Handle saving the current user input to shared preferences when text has been updated.
+    // Source: https://alvinalexander.com/source-code/android/android-programming-how-save-edittext-changes-without-save-button-ie-text-change
+    TextWatcher watcher = new TextWatcher() {
+      // the user's changes are saved here
+      public void onTextChanged(CharSequence c, int start, int before, int count) {
+        saveSharedPrefs();
+      }
+      public void beforeTextChanged(CharSequence c, int start, int count, int after) {
+        // this space intentionally left blank
+      }
+      public void afterTextChanged(Editable c) {
+        // this one too
+      }
+    };
+
+    customerName.addTextChangedListener(watcher);
+    editDelivery.addTextChangedListener(watcher);
 
     return view;
   }
@@ -232,20 +279,31 @@ public class FragmentOrders extends Fragment implements OnClickListener {
   @Override
   public void onSaveInstanceState(Bundle state) {
     super.onSaveInstanceState(state);
-    String fileName = "";
 
     if (isPhotoTaken()) {
-      fileName = imageFile.getPath();
-      state.putString("imagePath", fileName);
+      state.putString("imagePath", imageFile.getPath());
     }
 
+    saveSharedPrefs();
+  }
+
+  void saveSharedPrefs() {
     if (prefs != null) {
       SharedPreferences.Editor editor = prefs.edit();
       editor.putString("CustomerName", getCustomerName());
       editor.putString("DeliveryAddress", getCustomerAddress());
+      String fileName = isPhotoTaken() ? imageFile.getPath() : "";
       editor.putString("ImagePath", fileName);
       editor.putInt("DeliveryTime", getDeliveryTime());
       editor.commit();
+    }
+  }
+
+  void restoreFromSharedPrefs() {
+    if (prefs != null) {
+      setCustomerName(prefs.getString("CustomerName", ""));
+      setCustomerAddress(prefs.getString("DeliveryAddress", ""));
+      setDeliveryTime(prefs.getInt("DeliveryTime", DEFAULT_DELIVERY_TIME));
     }
   }
 
