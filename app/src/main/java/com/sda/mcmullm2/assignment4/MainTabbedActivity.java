@@ -2,8 +2,10 @@ package com.sda.mcmullm2.assignment4;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +15,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Set;
 
 public class MainTabbedActivity extends AppCompatActivity {
@@ -22,8 +28,6 @@ public class MainTabbedActivity extends AppCompatActivity {
   private final int PRODUCTS_TAB_INDEX = 1;
   private final int ORDER_TAB_INDEX = 2;
   private final int COLLECTION_TAB_INDEX = 3;
-
-  private final int DEFAULT_DELIVERY_TIME = 3;
 
   String[] tabTitles;
   TabLayout tabLayout;
@@ -35,9 +39,10 @@ public class MainTabbedActivity extends AppCompatActivity {
 
   private String prefs_customerName = "";
   private Set<String> prefs_products = null;
-  private int prefs_deliveryTime = DEFAULT_DELIVERY_TIME;
+  // private int prefs_deliveryTime = DEFAULT_DELIVERY_TIME;
   private String prefs_address = "";
   private Boolean prefs_isCollection = false;
+  private String prefs_imagePath = "";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +98,7 @@ public class MainTabbedActivity extends AppCompatActivity {
           intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
 
           // Attach photo (if present) to email
-          Uri photo = (ordersFragment == null) ? null : ordersFragment.getPhotoUri();
+          Uri photo = getPhoto(prefs_imagePath);
           if (photo != null) {
             Log.i(TAG, "Photo URI");
             Log.i(TAG, photo.toString());
@@ -109,6 +114,21 @@ public class MainTabbedActivity extends AppCompatActivity {
         }
     }
     return false;
+  }
+
+  /**
+   * Given a file path, get a URI to the photo contained in it.
+   * @param filepath
+   * @return
+   */
+  private Uri getPhoto(String filepath) {
+    if (filepath.matches("")) return null;
+
+    File imageFile = new File(filepath);
+    Uri photoUri = FileProvider.getUriForFile(this,
+          BuildConfig.APPLICATION_ID + ".provider",
+          imageFile);
+    return photoUri;
   }
 
   /**
@@ -132,6 +152,10 @@ public class MainTabbedActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Validate and set any remaining SharedPreference data.
+   * @return <c>true</c> if the existing SharedPreferences are valid, otherwise <c>false</c>
+   */
   private boolean setPreferences() {
     Log.i(TAG, "Setting preferences");
 
@@ -142,26 +166,6 @@ public class MainTabbedActivity extends AppCompatActivity {
     if (isValidOrder()) {
       SharedPreferences.Editor editor = prefs.edit();
       editor.putString("Address", prefs_address);
-      /*
-      editor.putString("CustomerName", ordersFragment.getCustomerName());
-
-      // Add products
-      if (productsFragment.getSelectedProducts() != null) {
-        editor.putStringSet("Products", productsFragment.getSelectedProducts());
-      }
-
-      // Determine between delivery and collection
-      if (collectionFragment != null && collectionFragment.isForCollection()) {
-        // for collection
-        editor.putBoolean("IsCollection", true);
-        editor.putString("Address", collectionFragment.getAddress());
-      } else {
-        // for delivery
-        editor.putBoolean("IsCollection", false);
-        editor.putString("Address", ordersFragment.getCustomerAddress());
-      }
-      editor.putInt("DeliveryTime", ordersFragment.getDeliveryTime());
-      */
       editor.commit();
       return true;
     }
@@ -216,7 +220,7 @@ public class MainTabbedActivity extends AppCompatActivity {
     }
     prefs_customerName = prefs.getString("CustomerName", "");
     prefs_products = prefs.getStringSet("Products", null);
-    prefs_deliveryTime = prefs.getInt("DeliveryTime", DEFAULT_DELIVERY_TIME);
+    prefs_imagePath = prefs.getString("ImagePath", "");
   }
 
   private void setTab(int index) {

@@ -81,6 +81,7 @@ public class FragmentCollection extends Fragment {
     // Get a reference to the ListView, and attach the adapter to the ListView.
     final ListView listView = view.findViewById(R.id.listview_stores);
     lv = listView;
+    restorePreferences();
     listView.setAdapter(adapter);
 
     // Add event listener to each item.
@@ -107,8 +108,6 @@ public class FragmentCollection extends Fragment {
         savePreferences();
       }
     });
-
-    restorePreferences();
 
     return view;
   }
@@ -141,11 +140,9 @@ public class FragmentCollection extends Fragment {
     if (prefs != null) {
       SharedPreferences.Editor editor = prefs.edit();
       editor.putBoolean("IsCollection", isCollected);
-      if (selected != null) {
-        editor.putString("CollectionArea", selected.getArea());
-        editor.putString("CollectionAddress", getAddress());
-        editor.putInt("CollectionIndex", selectedIndex);
-      }
+      editor.putString("CollectionArea", selected != null ? selected.getArea() : "");
+      editor.putString("CollectionAddress", selected != null ? getAddress() : "");
+      editor.putInt("CollectionIndex", selected != null ? selectedIndex : -1);
       editor.commit();
     }
   }
@@ -171,7 +168,7 @@ public class FragmentCollection extends Fragment {
   }
 
   public void setSelected(ListView listView, int index) {
-    // listView.setSelector(R.color.product_item_background_selected);
+    listView.setSelector(index >= 0 ? R.color.product_item_background_selected : R.color.light_accent);
     listView.setSelection(index);
   }
 }
