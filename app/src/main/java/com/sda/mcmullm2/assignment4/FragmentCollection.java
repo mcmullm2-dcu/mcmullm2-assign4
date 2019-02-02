@@ -80,7 +80,6 @@ public class FragmentCollection extends Fragment {
 
     // Get a reference to the ListView, and attach the adapter to the ListView.
     final ListView listView = view.findViewById(R.id.listview_stores);
-    restorePreferences(listView);
     lv = listView;
     listView.setAdapter(adapter);
 
@@ -90,6 +89,7 @@ public class FragmentCollection extends Fragment {
       public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
         Store clickedStore = stores.get(i);
         if (selected != clickedStore) {
+          listView.setSelector(R.color.product_item_background_selected);
           setSelected(listView, i);
           selected = stores.get(i);
           selectedIndex = i;
@@ -98,7 +98,8 @@ public class FragmentCollection extends Fragment {
           Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_SHORT).show();
         } else {
           view.setSelected(false);
-          listView.setSelector(android.R.color.transparent);
+          listView.setSelector(R.color.light_accent);
+          setSelected(listView, -1);
           selected = null;
           isCollected = false;
           Toast.makeText(getActivity(), getString(R.string.collection_off), Toast.LENGTH_SHORT).show();
@@ -106,6 +107,9 @@ public class FragmentCollection extends Fragment {
         savePreferences();
       }
     });
+
+    restorePreferences();
+
     return view;
   }
 
@@ -149,16 +153,16 @@ public class FragmentCollection extends Fragment {
   /**
    * Restore data from Shared Preferences.
    */
-  public void restorePreferences(ListView listView) {
-    if (prefs != null && stores != null) {
+  public void restorePreferences() {
+    if (prefs != null && lv != null) {
       isCollected = prefs.getBoolean("IsCollection", false);
       selectedIndex = prefs.getInt("CollectionIndex", -1);
       String area = prefs.getString("CollectionArea", "");
-      if (area != "") {
+      if (area != "" && stores != null) {
         for (Store s : stores) {
           if (s.getArea() == area) {
             selected = s;
-            setSelected(listView, selectedIndex);
+            setSelected(lv, selectedIndex);
             break;
           }
         }
@@ -167,7 +171,7 @@ public class FragmentCollection extends Fragment {
   }
 
   public void setSelected(ListView listView, int index) {
-    listView.setSelector(R.color.product_item_background_selected);
+    // listView.setSelector(R.color.product_item_background_selected);
     listView.setSelection(index);
   }
 }
