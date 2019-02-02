@@ -19,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -187,7 +189,7 @@ public class FragmentOrders extends Fragment implements OnClickListener {
    */
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+      final Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_orders, container, false);
 
@@ -243,6 +245,17 @@ public class FragmentOrders extends Fragment implements OnClickListener {
 
     customerName.addTextChangedListener(watcher);
     editDelivery.addTextChangedListener(watcher);
+    // Save the order data when a new spinner value is selected
+    // Source: https://stackoverflow.com/a/30497485/5233918
+    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          saveSharedPrefs();
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    });
 
     return view;
   }
@@ -287,6 +300,9 @@ public class FragmentOrders extends Fragment implements OnClickListener {
     saveSharedPrefs();
   }
 
+  /**
+   * Updates the SharedPreferences data with the values entered by the user.
+   */
   void saveSharedPrefs() {
     if (prefs != null) {
       SharedPreferences.Editor editor = prefs.edit();
@@ -299,6 +315,9 @@ public class FragmentOrders extends Fragment implements OnClickListener {
     }
   }
 
+  /**
+   * Populates the text views and spinner with data saved in SharedPreferences.
+   */
   void restoreFromSharedPrefs() {
     if (prefs != null) {
       setCustomerName(prefs.getString("CustomerName", ""));
