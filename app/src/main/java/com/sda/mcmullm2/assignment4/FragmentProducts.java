@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager.LayoutParams;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;

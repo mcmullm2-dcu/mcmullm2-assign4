@@ -53,8 +53,8 @@ with views overlapping when moving between portrait and landscape.
       android:layout_below="@+id/imageView"
       android:gravity="top"
       android:hint="@string/delivery_instruction"
-      android:inputType="textMultiLine"
-      android:lines="3"
+      android:imeOptions="actionDone"
+      android:inputType="text"
       />
 
     <LinearLayout

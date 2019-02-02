@@ -19,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -192,6 +194,10 @@ public class FragmentOrders extends Fragment implements OnClickListener {
       final Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_orders, container, false);
+
+    // Hide the IME keyboard by default.
+    // Source: Assignment 3 feedback document (Chris Coughlan)
+    getActivity().getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
     // Get a reference to the address EditText view. The original version also set some IME options,
     // but this prevented the 'newline' button from appearing on the keyboard, which I felt
