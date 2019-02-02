@@ -3,6 +3,7 @@ package com.sda.mcmullm2.assignment4;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -343,7 +344,18 @@ public class FragmentOrders extends Fragment implements OnClickListener {
     try {
       imageFile = new File(filepath);
       InputStream ims = new FileInputStream(imageFile);
-      imgThumbnail.setImageBitmap(BitmapFactory.decodeStream(ims));
+
+      // Create a bitmap to display from the saved file. Bail out if it's got no data.
+      Bitmap thumbnail = BitmapFactory.decodeStream(ims);
+      if (thumbnail.getByteCount() == 0) {
+        return;
+      }
+
+      // Set the ImageView to display a scaled version of the image to reduce memory requirements of
+      // the user's device, as per Assignment 3 feedback. Set the 'filter' parameter to 'true'
+      // though to take advantage of interpolation, which seems to give a smoother image.
+      imgThumbnail.setImageBitmap(Bitmap.createScaledBitmap(thumbnail, 300, 200, true));
+
       imgCaption.setText(R.string.photo_new_message);
       photoPath = imageFile.getAbsolutePath();
       photoUri = FileProvider.getUriForFile(this.getContext(),
