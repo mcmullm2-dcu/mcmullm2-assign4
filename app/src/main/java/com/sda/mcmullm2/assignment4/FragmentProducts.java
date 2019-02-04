@@ -37,8 +37,8 @@ public class FragmentProducts extends Fragment {
    * @return
    */
   public static FragmentProducts newInstance(SharedPreferences preferences) {
-    FragmentProducts fragment = new FragmentProducts();
     prefs = preferences;
+    FragmentProducts fragment = new FragmentProducts();
     return fragment;
   }
 
@@ -86,7 +86,7 @@ public class FragmentProducts extends Fragment {
       editor.commit();
     }
 
-    if (selectedProducts.size() > 0) {
+    if (selectedProducts != null && selectedProducts.size() > 0) {
       for (Product p : products) {
         p.setSelection(selectedProducts.contains(p.getProductName()));
       }
@@ -104,12 +104,19 @@ public class FragmentProducts extends Fragment {
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
+        if (selectedProducts == null) selectedProducts = new HashSet<String>();
         Product selectedItem = products.get(i);
         selectedItem.toggleSelection();
         if (selectedItem.isSelected()) {
           selectedProducts.add(selectedItem.getProductName());
         } else {
           selectedProducts.remove(selectedItem.getProductName());
+        }
+
+        if (prefs != null && selectedProducts != null) {
+          SharedPreferences.Editor editor = prefs.edit();
+          editor.putStringSet("Products", selectedProducts);
+          editor.commit();
         }
 
         String toastMsg = selectedItem.getProductName() + " ";
